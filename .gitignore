@@ -1,0 +1,30 @@
+node_modules/
+dist/
+build/
+/.env
+.env.local
+# apps/web/.env is committed: brand identity, no secrets
+*.log
+
+# database
+prisma/*.db
+prisma/*.db-journal
+prisma/*.db-shm
+prisma/*.db-wal
+prisma/migrations/dev.db*
+
+# uploaded media (self-hosted video/images)
+uploads/*
+!uploads/.gitkeep
+
+# secrets — never commit OAuth client files
+client_secret_*.json
+
+# nightly database backups
+backups/
+
+# misc
+.DS_Store
+.vite/
+coverage/
+apps/web/dev-dist/

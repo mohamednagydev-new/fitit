@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="%VITE_HTML_LANG%" dir="%VITE_HTML_DIR%">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <!-- iOS home-screen icon: Safari ignores the web manifest icons, so these are
+         required or the installed app shows a blank/screenshot tile. -->
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="%VITE_BRAND_NAME%" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <!-- Pinch-zoom stays enabled (WCAG 1.4.4) — locking scale never worked on iOS anyway. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="%VITE_THEME_COLOR%" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <title>%VITE_APP_TITLE%</title>
+    <meta name="description" content="%VITE_APP_DESC%" />
+    <!-- Social share cards (WhatsApp/Facebook scrapers don't run JS — these statics are what they see) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="%VITE_BRAND_NAME%" />
+    <meta property="og:title" content="%VITE_OG_TITLE%" />
+    <meta property="og:description" content="%VITE_OG_DESC%" />
+    <meta property="og:url" content="%VITE_SITE_ORIGIN%/" />
+    <meta property="og:image" content="%VITE_SITE_ORIGIN%/pwa-512.png" />
+    <meta name="twitter:card" content="summary" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Nunito = Latin text · Fraunces = display numerals · Tajawal = Arabic -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800&family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <div id="root">
+      <!-- Boot splash: pure HTML/CSS painted the instant the document loads,
+           long before React parses — cold PWA starts show the brand pulsing
+           instead of a black screen. React replaces #root's content on mount,
+           so this needs no cleanup code. -->
+      <style>
+        .boot-wrap { position: fixed; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; background: radial-gradient(120% 85% at 12% 0%, #241a12 0%, #131118 45%, #08070a 100%); }
+        .boot-wrap img { width: 76px; height: 76px; border-radius: 20px; animation: bootpulse 1.15s ease-in-out infinite; }
+        .boot-wrap p { color: #fff; font-weight: 800; font-style: italic; letter-spacing: 0.04em; font-family: system-ui, sans-serif; }
+        @keyframes bootpulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(0.9); opacity: 0.75; } }
+      </style>
+      <div class="boot-wrap">
+        <img src="/pwa-192.png" alt="" />
+        <p>%VITE_BRAND_NAME%</p>
+      </div>
+    </div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

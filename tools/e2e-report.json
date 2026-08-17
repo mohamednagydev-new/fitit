@@ -1,0 +1,18 @@
+{
+  "email": "e2e_1786041311806@test.local",
+  "findings": [
+    {
+      "sev": "WARN",
+      "step": "join-by-code",
+      "msg": "code input not found on Achievements"
+    }
+  ],
+  "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 401 ()",
+    "Failed to load resource: the server responded with a status of 400 ()",
+    "Permissions policy violation: compute-pressure is not allowed in this document."
+  ],
+  "netFailures": [
+    "401 POST /api/gamification/challenges/join-code"
+  ]
+}
