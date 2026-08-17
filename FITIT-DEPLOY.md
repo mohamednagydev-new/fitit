@@ -54,6 +54,7 @@ deliberately NOT seeded here.
 cd C:\fitit
 node node_modules\tsx\dist\cli.mjs prisma\seed.ts               # programs, recipes, articles, exercises
 node node_modules\tsx\dist\cli.mjs prisma\seed-engagement.ts    # badges + challenges
+node node_modules\tsx\dist\cli.mjs prisma\seed-demo-fitit.ts    # OPTIONAL: demo users/coaches/gym (test1234) — testing only, skip for real launch
 ```
 English-only brand: skip every `prisma\ar\*` script and `translate-manual.ts`.
 
