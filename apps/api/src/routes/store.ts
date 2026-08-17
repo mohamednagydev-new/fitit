@@ -4,7 +4,7 @@ import { dayString } from '../lib/time';
 import { countryFilter, countryForRequest } from '../lib/geo';
 
 /** Public partner directory + product catalog.
- *  PULSE is a shop window only — there is no cart, no checkout, no orders.
+ *  FIT IT is a shop window only — there is no cart, no checkout, no orders.
  *  Users contact partners directly (WhatsApp / phone / website) and everything
  *  after that happens offline between them. We only count the intro. */
 export const storeRouter = Router();

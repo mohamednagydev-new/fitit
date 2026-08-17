@@ -8,6 +8,7 @@ import LanguageToggle from '../components/LanguageToggle';
 import { track } from '../lib/track';
 import { utmMeta } from '../lib/utm';
 import { isInAppBrowser } from '../lib/install';
+import { BRAND_NAME } from '../lib/brand';
 
 function GoogleLogo() {
   return (
@@ -76,7 +77,7 @@ export default function Login() {
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <img src="/pwa-192.png" alt="" className="h-9 w-9 rounded-xl shadow-lg" />
-            <span className="text-2xl font-extrabold italic">PULSE</span>
+            <span className="text-2xl font-extrabold italic">{BRAND_NAME}</span>
           </div>
           <LanguageToggle variant="compact" />
         </div>

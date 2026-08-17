@@ -50,6 +50,7 @@ import ScreenshotRail from '../components/ScreenshotRail';
 import AmbientBg from '../components/AmbientBg';
 import { openInstall } from '../lib/install';
 import { useAuth } from '../store/auth';
+import { BRAND_NAME } from '../lib/brand';
 
 /* ------------------------------------------------------------------ *
  * Partner contact details — CHANGE THESE IN ONE PLACE.
@@ -71,7 +72,7 @@ const USER_BENEFITS: Benefit[] = [
   { icon: ScanLine, en: 'Interactive muscle map — tap a muscle, get its exercises', ar: 'خريطة عضلات تفاعلية — دوس على العضلة تجيبلك تمارينها' },
   { icon: CalendarDays, en: 'Your weekly schedule + one-tap start', ar: 'جدولك الأسبوعي + زرار واحد يبدأ تمرين النهارده' },
   { icon: Salad, en: 'A daily meal plan that explains itself — every plate says why, and you can swap any meal', ar: 'خطة أكل يومية بتشرح نفسها — كل طبق معاه السبب، وتقدر تبدّل أي وجبة' },
-  { icon: Salad, en: 'Egyptian food database — log فول وطعمية by name, in Arabic', ar: 'قاعدة أكل مصري — سجّل فول وطعمية بالاسم وبالعربي' },
+  { icon: Salad, en: 'Everyday food database — log your meals by name in seconds', ar: 'قاعدة أكل مصري — سجّل فول وطعمية بالاسم وبالعربي' },
   { icon: Sparkles, en: 'Snap your plate and the app estimates the calories', ar: 'صوّر طبقك والتطبيق يقدّر السعرات' },
   { icon: Bot, en: 'AI Coach — ask anything about training & food, answers from our own library', ar: 'كوتش AI — اسأل أي حاجة في التمرين والأكل، والإجابة من مكتبتنا' },
   { icon: ScanBarcode, en: 'Scan any supermarket barcode — macros + a 1-10 score for YOUR goal', ar: 'امسح باركود أي منتج — القيم الغذائية + تقييم من ١٠ على حسب هدفك' },
@@ -100,7 +101,7 @@ const USER_BENEFITS: Benefit[] = [
   { icon: MessageSquare, en: 'Tell the team anything — ideas, problems, questions', ar: 'كلّم الفريق في أي حاجة — أفكار أو مشاكل أو أسئلة' },
   { icon: Clapperboard, en: 'Curated workout & yoga reels', ar: 'ريلز تمرين ويوجا مختارة بعناية' },
   { icon: Salad, en: '72 healthy recipes with calories', ar: '٧٢ وصفة صحية بالسعرات' },
-  { icon: BookOpen, en: '120 health articles in Arabic', ar: '١٢٠ مقال صحي بالعربي' },
+  { icon: BookOpen, en: '120 health articles by real coaches', ar: '١٢٠ مقال صحي بالعربي' },
   { icon: Music, en: 'Play your own music during workouts', ar: 'شغّل مزيكتك وانت بتتمرن' },
 ];
 
@@ -117,7 +118,7 @@ const DIFFERENCE: Contrast[] = [
   {
     themEn: 'Most apps ask what your goal is.',
     themAr: 'معظم التطبيقات بتسألك هدفك إيه.',
-    usEn: 'PULSE asks what hurts — then builds around it instead of ignoring it.',
+    usEn: `${BRAND_NAME} asks what hurts — then builds around it instead of ignoring it.`,
     usAr: 'PULSE بيسألك بيوجعك إيه — وبيبني الخطة حواليه بدل ما يتجاهله.',
   },
   {
@@ -133,15 +134,15 @@ const DIFFERENCE: Contrast[] = [
     usAr: 'كل حاجة هنا مجانية. كلها. مفيش نسخة مدفوعة أصلاً.',
   },
   {
-    themEn: 'Arabic apps are usually translated, in stiff فصحى.',
+    themEn: 'Most app copy reads like a template.',
     themAr: 'التطبيقات العربية غالباً مترجمة، وبفصحى تقيلة.',
-    usEn: 'Every word here was written in Egyptian, by hand. Nothing is machine-translated.',
+    usEn: 'Every word here was written by hand, for real people. Nothing is machine-generated.',
     usAr: 'كل كلمة هنا اتكتبت بالمصري بإيد. مفيش أي حاجة مترجمة بالآلة.',
   },
   {
     themEn: 'Most plans stay the same while your body changes.',
     themAr: 'معظم الخطط بتفضل زي ما هي وانت بتتغير.',
-    usEn: 'Every four weeks PULSE checks whether it worked, and adjusts — deload, ease off, or push.',
+    usEn: `Every four weeks ${BRAND_NAME} checks whether it worked, and adjusts — deload, ease off, or push.`,
     usAr: 'كل ٤ أسابيع PULSE بيشوف الخطة نفعت ولا لأ، ويظبطها — يخفف أو يريّحك أو يزوّد.',
   },
 ];
@@ -166,9 +167,9 @@ const SPONSOR_BENEFITS: Benefit[] = [
 ];
 
 const STORE_BENEFITS: Benefit[] = [
-  { icon: ShoppingBag, en: 'List your products in the PULSE store', ar: 'اعرض منتجاتك في متجر PULSE' },
+  { icon: ShoppingBag, en: `List your products in the ${BRAND_NAME} store`, ar: 'اعرض منتجاتك في متجر PULSE' },
   { icon: MessageSquare, en: 'Customers contact you directly on WhatsApp or phone', ar: 'العملاء بيكلموك مباشرة على واتساب أو تليفون' },
-  { icon: HeartHandshake, en: 'No commission — PULSE never handles the sale', ar: 'بدون عمولة — PULSE مش بيتدخل في البيع' },
+  { icon: HeartHandshake, en: `No commission — ${BRAND_NAME} never handles the sale`, ar: 'بدون عمولة — PULSE مش بيتدخل في البيع' },
   { icon: Ticket, en: 'Run a coupon and see exactly how many people revealed it', ar: 'اعمل كوبون وشوف بالظبط كام واحد فتحه' },
 ];
 
@@ -252,7 +253,7 @@ const HOW_TO: Step[] = [
     icon: Bot, to: '/coach-chat',
     en: 'Ask the AI Coach anything',
     ar: 'اسأل كوتش الـAI أي حاجة',
-    enBody: 'Training, food, plateaus, soreness — short practical answers from PULSE\'s own library, in Egyptian Arabic.',
+    enBody: `Training, food, plateaus, soreness — short practical answers from ${BRAND_NAME}'s own library.`,
     arBody: 'تمرين، أكل، ثبات وزن، شد عضلي — إجابات قصيرة وعملية من مكتبة PULSE نفسها وبالمصري.',
   },
   {
@@ -273,7 +274,7 @@ const HOW_TO: Step[] = [
     icon: Download, action: 'install',
     en: 'Put it on your home screen',
     ar: 'حطه على شاشتك الرئيسية',
-    enBody: 'One tap makes PULSE a real app — full screen, faster, with reminders. Smaller than a single photo, no app store needed.',
+    enBody: `One tap makes ${BRAND_NAME} a real app — full screen, faster, with reminders. Smaller than a single photo, no app store needed.`,
     arBody: 'دوسة واحدة تخلي PULSE تطبيق حقيقي — شاشة كاملة وأسرع وبتنبيهات. أصغر من صورة واحدة ومن غير ستور.',
   },
 ];
@@ -427,10 +428,10 @@ export default function Help() {
   const waText = encodeURIComponent(
     isAr
       ? 'أهلاً PULSE 👋 عايز أعرف تفاصيل الشراكة والرعاية.'
-      : "Hi PULSE 👋 I'd like to know more about partnering with you.",
+      : `Hi ${BRAND_NAME} 👋 I'd like to know more about partnering with you.`,
   );
   const waHref = `https://wa.me/${PARTNER_WHATSAPP}?text=${waText}`;
-  const mailHref = `mailto:${PARTNER_EMAIL}?subject=${encodeURIComponent('PULSE partnership')}`;
+  const mailHref = `mailto:${PARTNER_EMAIL}?subject=${encodeURIComponent(`${BRAND_NAME} partnership`)}`;
 
   return (
     <div className="relative min-h-screen pb-16">
@@ -652,7 +653,7 @@ function WhyDifferent({ isAr }: { isAr: boolean }) {
     >
       <div className="fitness-hero relative px-5 py-4">
         <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-white/70">
-          {isAr ? 'ليه PULSE' : 'Why PULSE'}
+          {isAr ? 'ليه PULSE' : `Why ${BRAND_NAME}`}
         </p>
         <h2 className="mt-1 text-[19px] font-extrabold leading-snug">
           {isAr ? 'مش تطبيق لياقة تاني' : 'Not another fitness app'}

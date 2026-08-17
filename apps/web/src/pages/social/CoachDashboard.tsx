@@ -8,6 +8,7 @@ import { useAuth } from '../../store/auth';
 import { Loader, MediaImage, EmptyState, ErrorMsg } from '../../components/ui';
 import TopBar from '../../components/TopBar';
 import { toast } from '../../lib/toast';
+import { BRAND_NAME } from '../../lib/brand';
 
 interface Ex { name: string; sets: string; reps: string }
 
@@ -249,7 +250,7 @@ export default function CoachDashboard() {
                 />
                 <div className="min-w-0 flex-1 space-y-2">
                   <a
-                    href={`https://wa.me/?text=${encodeURIComponent(L(`Train with me on PULSE 💪 ${invite.url}`, `اتمرن معايا على PULSE 💪 ${invite.url}`))}`}
+                    href={`https://wa.me/?text=${encodeURIComponent(L(`Train with me on ${BRAND_NAME} 💪 ${invite.url}`, `اتمرن معايا على PULSE 💪 ${invite.url}`))}`}
                     target="_blank"
                     rel="noreferrer"
                     className="btn-pill w-full justify-center bg-white/20 text-sm font-bold text-white"

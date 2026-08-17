@@ -10,6 +10,7 @@ import { Loader, MediaImage, EmptyState } from '../components/ui';
 import TopBar from '../components/TopBar';
 import AmbientBg from '../components/AmbientBg';
 import { ProductCard, ProductSheet, trackStore, type StoreProduct, type StorePartner } from './Store';
+import { BRAND_NAME } from '../lib/brand';
 
 const tap = { scale: 0.96 } as const;
 
@@ -198,7 +199,7 @@ function GymCommunity({ gymId }: { gymId: string }) {
                 </div>
               ))}
               <p className="pt-1 text-center text-[11px] text-gray-400">
-                {L(`${board.memberCount} members on PULSE`, `${board.memberCount} عضو على PULSE`)}
+                {L(`${board.memberCount} members on ${BRAND_NAME}`, `${board.memberCount} عضو على PULSE`)}
               </p>
             </div>
           ) : (

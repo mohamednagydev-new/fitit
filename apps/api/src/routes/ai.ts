@@ -97,7 +97,7 @@ aiRouter.post('/chat', async (req: AuthedRequest, res) => {
    *
    * First, ungrounded answers. When prisma/embed.ts has never run, CONTEXT is empty —
    * and the previous prompt let the model answer anyway. At that point this is not
-   * "the PULSE coach citing our library", it is generic ChatGPT wearing our name,
+   * "the FIT IT coach citing our library", it is generic ChatGPT wearing our name,
    * saying things nobody here wrote or reviewed. Now it is told it has no library and
    * must admit it.
    *
@@ -136,8 +136,8 @@ aiRouter.post('/chat', async (req: AuthedRequest, res) => {
 
   const system = [
     nutrition
-      ? 'You are the PULSE Nutritionist (أخصائي التغذية) - a practical nutrition assistant for an Egyptian audience. Egyptian foods first (فول، فراخ، أرز، كشري…), budget-aware, zero guilt-tripping.'
-      : 'You are the PULSE Coach - a practical fitness and wellness assistant for an Egyptian audience.',
+      ? 'You are the FIT IT Nutritionist (أخصائي التغذية) - a practical nutrition assistant for an Egyptian audience. Egyptian foods first (فول، فراخ، أرز، كشري…), budget-aware, zero guilt-tripping.'
+      : 'You are the FIT IT Coach - a practical fitness and wellness assistant for an Egyptian audience.',
     `Answer in ${lang === 'ar' ? 'simple Egyptian Arabic, not formal MSA' : 'English'}.`,
     'Keep every answer SHORT: 2-4 sentences, no lists unless asked, no repetition of the question. One focused follow-up question at most.',
     ...(nutrition
@@ -149,8 +149,8 @@ aiRouter.post('/chat', async (req: AuthedRequest, res) => {
     grounded
       ? 'Answer FROM THE CONTEXT below and cite it like [1]. If the context does not cover the question, say so plainly instead of filling the gap from memory.'
       : nutrition
-        ? 'No PULSE library context matched. Answer only general, uncontroversial nutrition knowledge, keep it short.'
-        : "You have NO library available for this question. Answer only general, uncontroversial fitness knowledge, keep it short, and tell the user this answer is not from PULSE's own content.",
+        ? 'No FIT IT library context matched. Answer only general, uncontroversial nutrition knowledge, keep it short.'
+        : "You have NO library available for this question. Answer only general, uncontroversial fitness knowledge, keep it short, and tell the user this answer is not from FIT IT's own content.",
     'NEVER diagnose, never interpret symptoms, test results or medication, and never advise on pregnancy, injury or a named medical condition (diabetes, blood pressure, kidney...). For any of those, say it needs a real professional and point them to the coaches in the app.',
     'Do not invent numbers, programme names, or article titles.',
     profileBlock,
@@ -176,7 +176,7 @@ aiRouter.post('/chat', async (req: AuthedRequest, res) => {
  * RETIRED: the language-model plan generator.
  *
  * It produced an unexplainable plan from a single prompt, which is the exact thing
- * PULSE tells users it does not do. Both halves are now covered by rule engines that
+ * FIT IT tells users it does not do. Both halves are now covered by rule engines that
  * can show their working: workouts by lib/coach.ts via /api/assessment and
  * /api/path, meals by lib/mealplan.ts via /api/meals/plan.
  *

@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { BRAND_NAME, SITE_ORIGIN } from './brand';
 
 /**
  * Per-page SEO for content pages. Google renders JS, so a dynamic title,
@@ -14,7 +15,7 @@ export function usePageMeta(opts: {
 }) {
   useEffect(() => {
     const prevTitle = document.title;
-    if (opts.title) document.title = `${opts.title} — PULSE`;
+    if (opts.title) document.title = `${opts.title} — ${BRAND_NAME}`;
 
     let meta = document.querySelector('meta[name="description"]') as HTMLMetaElement | null;
     const prevDesc = meta?.content;
@@ -44,7 +45,7 @@ export function usePageMeta(opts: {
         document.head.appendChild(canonical);
         createdCanonical = true;
       }
-      canonical.href = `https://pulse.geddo.online${window.location.pathname}`;
+      canonical.href = `${SITE_ORIGIN}${window.location.pathname}`;
     }
 
     return () => {

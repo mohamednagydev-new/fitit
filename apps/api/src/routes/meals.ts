@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { z } from 'zod';
 import { prisma } from '../lib/prisma';
+import { env } from '../env';
 import { requireAuth, AuthedRequest } from '../middleware/auth';
 import { localizeResponse } from '../lib/localize';
 import { touchStreak } from '../lib/gamify';
@@ -409,7 +410,7 @@ mealsRouter.get('/barcode/:code', async (req: AuthedRequest, res) => {
   try {
     const r = await fetch(
       `https://world.openfoodfacts.org/api/v2/product/${code}.json?fields=product_name,brands,nutriments,serving_size,quantity`,
-      { headers: { 'User-Agent': 'PULSE-fitness-app/1.0 (pulse.geddo.online)' }, signal: AbortSignal.timeout(8000) },
+      { headers: { 'User-Agent': `FIT-IT-fitness-app/1.0 (${env.WEB_ORIGIN.replace(/^https?:\/\//, '')})` }, signal: AbortSignal.timeout(8000) },
     );
     const json: any = await r.json();
     product = json?.product;

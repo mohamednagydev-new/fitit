@@ -3,7 +3,7 @@ import type { Request } from 'express';
 /**
  * Country scoping for the local half of the app.
  *
- * PULSE has two kinds of content and they behave differently:
+ * FIT IT has two kinds of content and they behave differently:
  *
  *   GLOBAL  — programmes, lessons, exercises, articles, recipes, challenges.
  *             A squat is a squat in Cairo and in Riyadh. Never filtered.

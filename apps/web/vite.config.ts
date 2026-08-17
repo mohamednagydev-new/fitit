@@ -9,7 +9,7 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, __dirname, 'VITE_');
   process.env.VITE_BRAND = env.VITE_BRAND || 'fitit';
   const NAME = env.VITE_BRAND_NAME || 'FIT IT';
-  const ORIGIN = env.VITE_SITE_ORIGIN || 'https://fitit.geddo.online';
+  const ORIGIN = env.VITE_SITE_ORIGIN || 'https://fitit.grand-hub.com';
   const THEME = env.VITE_THEME_COLOR || '#CA8A04';
   const isPulse = process.env.VITE_BRAND === 'pulse';
 

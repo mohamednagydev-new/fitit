@@ -10,6 +10,7 @@ import { ErrorMsg, Loader } from '../components/ui';
 import Sheet from '../components/Sheet';
 import TopBar from '../components/TopBar';
 import AmbientBg from '../components/AmbientBg';
+import { BRAND_NAME } from '../lib/brand';
 
 /**
  * The day's plate.
@@ -278,7 +279,7 @@ function GrocerySheet({ open, onClose }: { open: boolean; onClose: () => void })
 
   /** "PULSE — Shopping list (3 days)" then one "• item ×n" per line. */
   const plainText = () => {
-    const title = isAr ? `PULSE — قايمة المشتريات (${dayLabel(days)})` : `PULSE — Shopping list (${dayLabel(days)})`;
+    const title = isAr ? `PULSE — قايمة المشتريات (${dayLabel(days)})` : `${BRAND_NAME} — Shopping list (${dayLabel(days)})`;
     return [title, ...items.map((it) => `• ${it.text}${it.count > 1 ? ` ×${it.count}` : ''}`)].join('\n');
   };
 

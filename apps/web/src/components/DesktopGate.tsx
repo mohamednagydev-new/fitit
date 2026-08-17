@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { Smartphone, MonitorX } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../store/auth';
+import { BRAND_NAME } from '../lib/brand';
 
 const DISMISS_KEY = 'pulse_desktop_ok';
 
@@ -31,7 +32,7 @@ export default function DesktopGate() {
     <div className="fixed inset-0 z-[100] flex items-center justify-center bg-[#0d0b0a] p-8 text-white">
       <div className="fitness-hero absolute inset-0 opacity-60" aria-hidden />
       <div className="relative z-10 flex max-w-md flex-col items-center text-center">
-        <span className="text-3xl font-extrabold italic tracking-tight">PULSE</span>
+        <span className="text-3xl font-extrabold italic tracking-tight">{BRAND_NAME}</span>
         <div className="animate-float mt-8 flex h-20 w-20 items-center justify-center rounded-3xl bg-white/10 ring-4 ring-white/10 backdrop-blur">
           <Smartphone size={40} strokeWidth={1.5} />
         </div>

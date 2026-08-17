@@ -11,6 +11,7 @@ import {
 import { api } from '../lib/api';
 import { useAuth } from '../store/auth';
 import ScreenHeader from '../components/ScreenHeader';
+import { BRAND_NAME } from '../lib/brand';
 
 /** Same partner contacts as Help.tsx — change together. */
 const PARTNER_WHATSAPP = '201070799007';
@@ -195,7 +196,7 @@ const AUDIENCES: Audience[] = [
 /* Value statements instead of made-up numbers — no fake social proof. */
 const PROOF: { en: string; ar: string }[] = [
   { en: 'Free for early partners', ar: 'مجاني للشركاء الأوائل' },
-  { en: 'Arabic-first, made for Egypt', ar: 'بالمصري وأول مرة تتعمل كده' },
+  { en: 'Built with partners, for real gyms and coaches', ar: 'بالمصري وأول مرة تتعمل كده' },
   { en: 'You keep your clients — we hand you tools', ar: 'عملاءك بيفضلوا عملاءك — إحنا بنديك أدوات' },
   { en: 'Set up in a day, not a month', ar: 'التجهيز في يوم مش شهر' },
 ];
@@ -247,7 +248,7 @@ export default function PartnerBenefits() {
   const waText = encodeURIComponent(
     isAr
       ? `أهلاً، أنا ${aud.ar} ومهتم أشترك مع PULSE. ممكن التفاصيل؟`
-      : `Hi, I'm a ${aud.en.toLowerCase()} interested in partnering with PULSE. Can you share details?`,
+      : `Hi, I'm a ${aud.en.toLowerCase()} interested in partnering with ${BRAND_NAME}. Can you share details?`,
   );
 
   return (
@@ -264,7 +265,7 @@ export default function PartnerBenefits() {
               transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
               className="truncate text-2xl font-extrabold"
             >
-              {L('Partner with PULSE', 'اعرض بيزنس معانا')}
+              {L(`Partner with ${BRAND_NAME}`, 'اعرض بيزنس معانا')}
             </motion.h1>
             <p className="mt-0.5 text-xs text-white/70">
               {L('Coaches, gyms, brands, sponsors — real tools, live today.', 'مدربين وجيمات وبراندات ورعاة — أدوات حقيقية شغالة النهارده.')}
@@ -431,7 +432,7 @@ export default function PartnerBenefits() {
       {/* Cross-links guests can actually open */}
       <div className="mt-5 grid grid-cols-2 gap-2 px-4">
         <Link to="/help" className="card flex min-h-[48px] items-center justify-center gap-2 rounded-2xl text-sm font-bold text-ink shadow-sm">
-          <Building2 size={16} /> {L('What is PULSE?', 'إيه هو PULSE؟')}
+          <Building2 size={16} /> {L(`What is ${BRAND_NAME}?`, 'إيه هو PULSE؟')}
         </Link>
         <Link to="/gyms" className="card flex min-h-[48px] items-center justify-center gap-2 rounded-2xl text-sm font-bold text-ink shadow-sm">
           <Trophy size={16} /> {L('Browse gyms', 'شوف الجيمات')}

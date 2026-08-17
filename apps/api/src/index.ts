@@ -80,7 +80,7 @@ app.get('/api/unsubscribe', async (req, res) => {
   if (!u || !t || t !== unsubToken(u)) return res.status(400).send('Invalid link');
   await prisma.user.updateMany({ where: { id: u }, data: { emailOptOut: true } });
   res.send(
-    '<div style="font-family:sans-serif;text-align:center;padding:60px 20px"><h2>تم إلغاء الاشتراك ✓</h2><p>Unsubscribed — you will not receive these emails again.</p><a href="https://pulse.geddo.online" style="color:#f97316;font-weight:bold">pulse.geddo.online</a></div>',
+    `<div style="font-family:sans-serif;text-align:center;padding:60px 20px"><h2>تم إلغاء الاشتراك ✓</h2><p>Unsubscribed — you will not receive these emails again.</p><a href="${env.WEB_ORIGIN}" style="color:#f97316;font-weight:bold">${env.WEB_ORIGIN.replace(/^https?:\/\//, '')}</a></div>`,
   );
 });
 
@@ -194,7 +194,7 @@ async function main() {
   initRealtime(server, env.WEB_ORIGIN);
   startReminderScheduler();
   server.listen(env.PORT, () => {
-    console.log(`PULSE API + realtime running on http://localhost:${env.PORT}`);
+    console.log(`FIT IT API + realtime running on http://localhost:${env.PORT}`);
   });
 
   // Graceful shutdown: stop accepting connections, then release the SQLite handle.

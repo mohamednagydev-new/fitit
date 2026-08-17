@@ -10,6 +10,7 @@ import { Loader, MediaImage, HScroll, EmptyState } from '../components/ui';
 import Sheet from '../components/Sheet';
 import TopBar from '../components/TopBar';
 import AmbientBg from '../components/AmbientBg';
+import { BRAND_NAME } from '../lib/brand';
 
 export interface StorePartner {
   id: string;
@@ -67,7 +68,7 @@ export function ProductSheet({ product, onClose }: { product: StoreProduct; onCl
     trackStore(`products/${product.id}/contact`);
     window.open(url, '_blank', 'noopener');
   };
-  const waText = encodeURIComponent(`${product.title} — PULSE`);
+  const waText = encodeURIComponent(`${product.title} — ${BRAND_NAME}`);
 
   return (
     <Sheet open onClose={onClose} label={product.title}>

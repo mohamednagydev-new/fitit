@@ -369,7 +369,7 @@ async function runCheck() {
     await postLeaguePromotions().catch((e) => console.warn('[fb-league]', e?.message));
   }
 
-  // Daily 09:00 — top up the recurring Coach PULSE group sessions for the next
+  // Daily 09:00 — top up the recurring Coach FIT IT group sessions for the next
   // 7 days, so the Groups tab always shows real joinable live rooms. A social
   // area with nothing scheduled reads as a dead app on day one. Also fires on
   // any hour where NOTHING upcoming exists (first boot after deploy) — the
@@ -421,7 +421,7 @@ async function runCheck() {
     for (const u of lapsed) {
       const ar = u.preferredLang === 'ar';
       notifyUser(u.id, {
-        title: ar ? 'واحشنا في PULSE 👋' : 'We miss you at PULSE 👋',
+        title: ar ? 'واحشنا في FIT IT 👋' : 'We miss you at FIT IT 👋',
         body: ar ? `${u.firstName}، ارجع وابدأ سلسلتك من جديد النهارده.` : `${u.firstName}, come back and restart your streak today.`,
         url: '/',
         type: 'reminder',
@@ -433,8 +433,8 @@ async function runCheck() {
 /**
  * Nightly SQLite backup via VACUUM INTO — a consistent point-in-time copy that
  * works while the app is live (plain file copy of a WAL database is not safe).
- * Recurring PULSE-team live rooms: three weekly slots (Cairo clock), hosted by
- * the official Coach PULSE account. Idempotent — creates only slots missing in
+ * Recurring FIT IT-team live rooms: three weekly slots (Cairo clock), hosted by
+ * the official Coach FIT IT account. Idempotent — creates only slots missing in
  * the next 7 days; admins can delete/edit any single occurrence freely.
  */
 const GROUP_SLOTS = [
@@ -444,7 +444,7 @@ const GROUP_SLOTS = [
     title: 'Full-Body Kickoff · تمرين الجسم كله',
     muscleFocus: 'Full body',
     description:
-      'Open live session with Coach PULSE — all levels welcome. جلسة لايف مفتوحة مع كوتش PULSE، كل المستويات — انضم وشد حيلك مع الناس.',
+      'Open live session with Coach FIT IT — all levels welcome. جلسة لايف مفتوحة مع كوتش FIT IT، كل المستويات — انضم وشد حيلك مع الناس.',
   },
   {
     dow: 2, // Tuesday
@@ -494,7 +494,7 @@ async function ensureGroupSessions() {
       created += 1;
     }
   }
-  if (created) console.log(`[groups] scheduled ${created} PULSE session(s)`);
+  if (created) console.log(`[groups] scheduled ${created} FIT IT session(s)`);
 }
 
 /**
@@ -592,7 +592,7 @@ async function sendWeeklyRecaps() {
     if (workouts === 0 && prs === 0 && weeklyXp === 0) continue; // nothing to celebrate — skip
 
     const ar = u.preferredLang === 'ar';
-    const title = ar ? 'أسبوعك في PULSE 📊' : 'Your week on PULSE 📊';
+    const title = ar ? 'أسبوعك في FIT IT 📊' : 'Your week on FIT IT 📊';
     const body = ar
       ? `${u.firstName}: ${workouts} تمرينة · ${prs} رقم قياسي · سلسلة ${u.currentStreak} يوم 🔥 · ${weeklyXp} XP — تقدر تكسرها الأسبوع الجاي؟`
       : `${u.firstName}: ${workouts} workouts · ${prs} PRs · ${u.currentStreak}-day streak 🔥 · ${weeklyXp} XP — beat it next week?`;

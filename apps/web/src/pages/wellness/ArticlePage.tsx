@@ -11,6 +11,7 @@ import BookmarkButton from '../../components/BookmarkButton';
 import RichContent from '../../components/RichContent';
 import ContentVideo from '../../components/ContentVideo';
 import RelatedReels from '../../components/RelatedReels';
+import { BRAND_NAME, SITE_ORIGIN } from '../../lib/brand';
 
 export default function ArticlePage() {
   const { id } = useParams();
@@ -31,7 +32,7 @@ export default function ArticlePage() {
           headline: article.title,
           description: article.excerpt ?? undefined,
           inLanguage: ['en', 'ar'],
-          publisher: { '@type': 'Organization', name: 'PULSE', url: 'https://pulse.geddo.online' },
+          publisher: { '@type': 'Organization', name: BRAND_NAME, url: SITE_ORIGIN },
         }
       : undefined,
   });

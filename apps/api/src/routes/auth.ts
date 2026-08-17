@@ -56,8 +56,8 @@ authRouter.post('/register', async (req, res) => {
     notifyUser(referrer.id, {
       title: 'Your invite worked! 🎉',
       titleAr: 'دعوتك نجحت! 🎉',
-      body: `${user.firstName} joined PULSE through your link — you earned a streak freeze 🧊`,
-      bodyAr: `${user.firstName} انضم لـ PULSE من اللينك بتاعك — كسبت فريز للسلسلة 🧊`,
+      body: `${user.firstName} joined FIT IT through your link — you earned a streak freeze 🧊`,
+      bodyAr: `${user.firstName} انضم لـ FIT IT من اللينك بتاعك — كسبت فريز للسلسلة 🧊`,
       url: '/buddies',
       type: 'general',
     });
@@ -100,12 +100,12 @@ authRouter.post('/forgot-password', async (req, res) => {
     const link = `${origin}/reset-password?token=${rawToken}`;
     await sendMail({
       to: user.email,
-      subject: 'Reset your PULSE password',
+      subject: 'Reset your FIT IT password',
       text: `We received a request to reset your password.\n\nOpen this link to set a new password (valid for 1 hour):\n${link}\n\nIf you didn't request this, you can safely ignore this email.`,
       html: `
         <div style="font-family:Arial,Helvetica,sans-serif;max-width:480px;margin:0 auto;padding:24px;color:#1f2937">
           <h2 style="margin:0 0 12px">Reset your password</h2>
-          <p style="margin:0 0 16px;color:#4b5563">We received a request to reset the password for your PULSE account. This link is valid for 1 hour.</p>
+          <p style="margin:0 0 16px;color:#4b5563">We received a request to reset the password for your FIT IT account. This link is valid for 1 hour.</p>
           <p style="margin:0 0 24px">
             <a href="${link}" style="display:inline-block;background:#ec4899;color:#fff;text-decoration:none;padding:12px 24px;border-radius:9999px;font-weight:600">Set a new password</a>
           </p>

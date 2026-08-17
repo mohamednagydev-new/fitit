@@ -14,6 +14,7 @@ import MenuDrawer from '../components/MenuDrawer';
 import AmbientBg from '../components/AmbientBg';
 import { WaIcon, waOpen } from '../components/WaShare';
 import ScreenHeader from '../components/ScreenHeader';
+import { BRAND_NAME } from '../lib/brand';
 
 const tapSpring = { type: 'spring', stiffness: 500, damping: 30 } as const;
 
@@ -349,7 +350,7 @@ function InviteFriendsCard() {
     if (!data?.link) return;
     if (navigator.share) {
       try {
-        await navigator.share({ title: 'Join me on PULSE 💪', url: data.link });
+        await navigator.share({ title: `Join me on ${BRAND_NAME} 💪`, url: data.link });
         return;
       } catch {
         return; // user cancelled the share sheet

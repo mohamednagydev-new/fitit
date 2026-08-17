@@ -7,6 +7,7 @@ import { api } from '../lib/api';
 import { Loader } from '../components/ui';
 import ScreenHeader from '../components/ScreenHeader';
 import MenuDrawer from '../components/MenuDrawer';
+import { BRAND_NAME } from '../lib/brand';
 
 const spring = { type: 'spring', stiffness: 260, damping: 24 } as const;
 
@@ -62,7 +63,7 @@ export default function MyInvite() {
             )}
             link={referral.link}
             waText={L(
-              `Training with PULSE — free, in Egyptian Arabic, and it counts Egyptian food. Join me: ${referral.link}`,
+              `Training with ${BRAND_NAME} — free, and it counts your everyday food. Join me: ${referral.link}`,
               `أنا بتمرن على PULSE — مجاني وبالمصري وبيحسب أكلنا. انضملي من هنا: ${referral.link}`,
             )}
             isAr={isAr}
@@ -85,7 +86,7 @@ export default function MyInvite() {
             )}
             link={coachCode.url}
             waText={L(
-              `I coach on PULSE now — register from my link and you land connected to me directly: ${coachCode.url}`,
+              `I coach on ${BRAND_NAME} now — register from my link and you land connected to me directly: ${coachCode.url}`,
               `أنا بدرّب على PULSE — سجّل من اللينك ده وهتلاقي نفسك متوصّل بيا على طول: ${coachCode.url}`,
             )}
             isAr={isAr}
@@ -103,7 +104,7 @@ export default function MyInvite() {
             )}
             link={gymCode.url}
             waText={L(
-              `Join our gym on PULSE — every workout counts and your name goes on the gym screen: ${gymCode.url}`,
+              `Join our gym on ${BRAND_NAME} — every workout counts and your name goes on the gym screen: ${gymCode.url}`,
               `انضم لجيمنا على PULSE — كل تمرينة بتتحسب واسمك يطلع على شاشة الجيم: ${gymCode.url}`,
             )}
             isAr={isAr}

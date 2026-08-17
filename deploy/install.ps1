@@ -16,7 +16,7 @@
 [CmdletBinding()]
 param(
   [string]$Root        = 'C:\fitit',
-  [string]$HostName    = 'fitit.geddo.online',
+  [string]$HostName    = 'fitit.grand-hub.com',
   [string]$NodeExe     = "$env:ProgramFiles\nodejs\node.exe",
   [string]$Nssm        = '',
   [string]$SiteName    = 'fitit',
@@ -95,7 +95,7 @@ try {
   # Idempotent content seeds: safe on every deploy (upsert by title, never
   # duplicate, never touch user data). New content ships by adding a file here.
   Step 'Seeding content (diet programs, content paths, prize challenge)'
-  foreach ($seed in @('seed-diet-programs.ts', 'seed-paths.ts', 'seed-challenge-carrefour.ts')) {
+  foreach ($seed in @('seed-diet-programs.ts', 'seed-paths.ts')) {
     $file = Join-Path $Root ('prisma\' + $seed)
     if (Test-Path $file) {
       & $NodeExe (Join-Path $Root 'node_modules\tsx\dist\cli.mjs') $file

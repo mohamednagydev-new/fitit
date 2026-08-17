@@ -5,7 +5,7 @@ import { sendMail } from './mailer';
 import { daysAgoStr } from './time';
 
 /**
- * The ONE marketing email PULSE sends: a weekly win-back digest, Fridays, to
+ * The ONE marketing email FIT IT sends: a weekly win-back digest, Fridays, to
  * users inactive 7+ days who haven't opted out. Everything else stays push /
  * in-app — flooding inboxes with nudges would burn the domain's reputation
  * and take password-reset deliverability down with it.
@@ -15,6 +15,9 @@ import { daysAgoStr } from './time';
  */
 
 const PER_RUN_CAP = 150;
+
+// Bare host for display text (links themselves use the full WEB_ORIGIN).
+const SITE = env.WEB_ORIGIN.replace(/^https?:\/\//, '');
 
 export function unsubToken(userId: string): string {
   return crypto.createHmac('sha256', env.MEDIA_SIGN_SECRET).update(`unsub:${userId}`).digest('hex').slice(0, 32);
@@ -47,37 +50,37 @@ export async function sendInstallNudge(claim: (key: string) => Promise<boolean>)
     const ar = u.preferredLang !== 'en';
     const unsub = `${env.WEB_ORIGIN}/api/unsubscribe?u=${u.id}&t=${unsubToken(u.id)}`;
     const subject = ar
-      ? `${u.firstName}، خطوتين وPULSE يبقى تطبيق على موبايلك 📲`
-      : `${u.firstName}, two steps and PULSE lives on your phone 📲`;
+      ? `${u.firstName}، خطوتين وFIT IT يبقى تطبيق على موبايلك 📲`
+      : `${u.firstName}, two steps and FIT IT lives on your phone 📲`;
     const bodyLines = ar
       ? [
           `أهلاً ${u.firstName} 👋`,
           '',
-          'واخد بالك إن PULSE بيشتغل كتطبيق على موبايلك؟ من غير متجر ومن غير تحميل:',
+          'واخد بالك إن FIT IT بيشتغل كتطبيق على موبايلك؟ من غير متجر ومن غير تحميل:',
           '',
-          '📱 أندرويد: افتح pulse.geddo.online من كروم → دوس النقط ⋮ → «إضافة إلى الشاشة الرئيسية»',
+          `📱 أندرويد: افتح ${SITE} من كروم → دوس النقط ⋮ → «إضافة إلى الشاشة الرئيسية»`,
           '🍎 آيفون: افتح من سفاري → زرار المشاركة ⬆️ → «إضافة إلى الشاشة الرئيسية»',
           '',
           'وبعدها فعّل الإشعارات من جوه التطبيق — عشان تفكيرة تمرينك وتحديات أصحابك توصلك في وقتها 🔔',
           '',
-          'افتح دلوقتي: https://pulse.geddo.online',
+          `افتح دلوقتي: ${env.WEB_ORIGIN}`,
         ]
       : [
           `Hey ${u.firstName} 👋`,
           '',
-          'Did you know PULSE works as an app on your phone? No store, no download:',
+          'Did you know FIT IT works as an app on your phone? No store, no download:',
           '',
-          '📱 Android: open pulse.geddo.online in Chrome → tap ⋮ → "Add to Home Screen"',
+          `📱 Android: open ${SITE} in Chrome → tap ⋮ → "Add to Home Screen"`,
           '🍎 iPhone: open it in Safari → Share button ⬆️ → "Add to Home Screen"',
           '',
           'Then enable notifications inside the app — so workout reminders and friend challenges reach you on time 🔔',
           '',
-          'Open now: https://pulse.geddo.online',
+          `Open now: ${env.WEB_ORIGIN}`,
         ];
     const text = bodyLines.join('\n');
     const html =
       `<div dir="${ar ? 'rtl' : 'ltr'}" style="font-family:sans-serif;line-height:1.7">` +
-      bodyLines.map((l) => (l ? `<p style="margin:4px 0">${l.replace('https://pulse.geddo.online', '<a href="https://pulse.geddo.online" style="color:#f97316;font-weight:bold">pulse.geddo.online</a>')}</p>` : '')).join('') +
+      bodyLines.map((l) => (l ? `<p style="margin:4px 0">${l.replace(env.WEB_ORIGIN, `<a href="${env.WEB_ORIGIN}" style="color:#f97316;font-weight:bold">${SITE}</a>`)}</p>` : '')).join('') +
       `<p style="margin-top:20px;font-size:11px;color:#999"><a href="${unsub}" style="color:#999">${ar ? 'إلغاء الاشتراك في رسائل التذكير' : 'Unsubscribe from these emails'}</a></p></div>`;
     await sendMail({ to: u.email, subject, html, text }).catch(() => {});
     sent++;
@@ -117,7 +120,7 @@ export async function sendWeeklyDigest() {
       : ar
         ? 'في تحدي جديد كل سبت — ادخل شوف تحدي الأسبوع 🏆'
         : 'A new challenge starts every Saturday 🏆';
-    const subject = ar ? `${u.firstName}، وحشتنا في PULSE 💪` : `${u.firstName}, PULSE misses you 💪`;
+    const subject = ar ? `${u.firstName}، وحشتنا في FIT IT 💪` : `${u.firstName}, FIT IT misses you 💪`;
     const bodyLines = ar
       ? [
           `أهلاً ${u.firstName} 👋`,
@@ -126,7 +129,7 @@ export async function sendWeeklyDigest() {
           challengeLine,
           'تمرين واحد ١٥ دقيقة النهارده يرجّع كل حاجة.',
           '',
-          'افتح التطبيق: https://pulse.geddo.online',
+          `افتح التطبيق: ${env.WEB_ORIGIN}`,
         ]
       : [
           `Hey ${u.firstName} 👋`,
@@ -135,12 +138,12 @@ export async function sendWeeklyDigest() {
           challengeLine,
           'One 15-minute workout today restarts everything.',
           '',
-          'Open the app: https://pulse.geddo.online',
+          `Open the app: ${env.WEB_ORIGIN}`,
         ];
     const text = bodyLines.join('\n');
     const html =
       `<div dir="${ar ? 'rtl' : 'ltr'}" style="font-family:sans-serif;line-height:1.7">` +
-      bodyLines.map((l) => (l ? `<p style="margin:4px 0">${l.replace('https://pulse.geddo.online', '<a href="https://pulse.geddo.online" style="color:#f97316;font-weight:bold">pulse.geddo.online</a>')}</p>` : '')).join('') +
+      bodyLines.map((l) => (l ? `<p style="margin:4px 0">${l.replace(env.WEB_ORIGIN, `<a href="${env.WEB_ORIGIN}" style="color:#f97316;font-weight:bold">${SITE}</a>`)}</p>` : '')).join('') +
       `<p style="margin-top:20px;font-size:11px;color:#999"><a href="${unsub}" style="color:#999">${ar ? 'إلغاء الاشتراك في رسائل التذكير' : 'Unsubscribe from these emails'}</a></p></div>`;
     await sendMail({ to: u.email, subject, html, text }).catch(() => {});
     sent++;

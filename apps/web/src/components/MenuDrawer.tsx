@@ -14,6 +14,7 @@ import { MediaImage } from './ui';
 import { rankRing } from '../lib/levels';
 import LanguageToggle from './LanguageToggle';
 import { currentTheme, toggleTheme } from '../lib/theme';
+import { BRAND_NAME } from '../lib/brand';
 
 type Item = { to: string; en: string; ar: string; icon: LucideIcon };
 type Group = { en: string; ar: string; items: Item[] };
@@ -59,7 +60,7 @@ const GROUPS: Group[] = [
   {
     en: 'Discover', ar: 'اكتشف',
     items: [
-      { to: '/features', en: 'PULSE treasures', ar: 'كنوز PULSE', icon: Gem },
+      { to: '/features', en: `${BRAND_NAME} treasures`, ar: 'كنوز PULSE', icon: Gem },
       { to: '/gyms', en: 'Find a gym', ar: 'دوّر على جيم', icon: Building2 },
       { to: '/store', en: 'Store', ar: 'المتجر', icon: ShoppingBag },
       { to: '/deals', en: 'Deals', ar: 'العروض', icon: Ticket },
@@ -148,7 +149,7 @@ export default function MenuDrawer({ className = '' }: { className?: string }) {
               transition={{ type: 'spring', stiffness: 420, damping: 40 }}
             >
               <div className="flex shrink-0 items-center justify-between px-5 pb-3" style={{ paddingTop: 'calc(env(safe-area-inset-top, 0px) + 2.5rem)' }}>
-                <span className="text-2xl font-extrabold italic">PULSE</span>
+                <span className="text-2xl font-extrabold italic">{BRAND_NAME}</span>
                 <button onClick={close} aria-label={L('Close menu', 'اقفل القائمة')} className="p-1"><X /></button>
               </div>
 

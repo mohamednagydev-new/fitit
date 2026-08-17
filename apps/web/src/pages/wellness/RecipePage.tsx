@@ -12,6 +12,7 @@ import { WaIcon, waOpen } from '../../components/WaShare';
 import BookmarkButton from '../../components/BookmarkButton';
 import ContentVideo from '../../components/ContentVideo';
 import RelatedReels from '../../components/RelatedReels';
+import { BRAND_NAME, SITE_ORIGIN } from '../../lib/brand';
 
 const reveal = { hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0 } };
 
@@ -33,7 +34,7 @@ export default function RecipePage() {
           nutrition: recipe.calories
             ? { '@type': 'NutritionInformation', calories: `${recipe.calories} calories`, proteinContent: recipe.protein ? `${recipe.protein} g` : undefined }
             : undefined,
-          publisher: { '@type': 'Organization', name: 'PULSE', url: 'https://pulse.geddo.online' },
+          publisher: { '@type': 'Organization', name: BRAND_NAME, url: SITE_ORIGIN },
         }
       : undefined,
   });

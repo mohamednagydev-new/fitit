@@ -18,6 +18,7 @@ import { getSocket } from './lib/socket';
 import { celebrateFeedback } from './lib/haptics';
 import { pulseChime } from './lib/chime';
 import { track } from './lib/track';
+import { BRAND_NAME } from './lib/brand';
 
 const TAB_ROUTES = ['/', '/programs', '/community', '/wellness', '/profile'];
 import AppLayout from './components/AppLayout';
@@ -546,7 +547,7 @@ function DesktopBackdrop() {
   return (
     <div className="pointer-events-none fixed inset-0 z-0 hidden select-none items-center justify-between px-[7vw] text-white lg:flex">
       <div className="max-w-sm">
-        <div className="text-6xl font-extrabold italic tracking-tight text-white/90">PULSE</div>
+        <div className="text-6xl font-extrabold italic tracking-tight text-white/90">{BRAND_NAME}</div>
         <p className="mt-4 text-xl font-medium text-white/50">
           Train. Eat. Recover. Repeat.
         </p>

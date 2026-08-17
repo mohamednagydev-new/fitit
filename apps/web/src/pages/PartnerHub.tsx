@@ -9,6 +9,7 @@ import { toast } from '../lib/toast';
 import { Loader, MediaImage, EmptyState } from '../components/ui';
 import TopBar from '../components/TopBar';
 import AmbientBg from '../components/AmbientBg';
+import { BRAND_NAME } from '../lib/brand';
 
 const spring = { type: 'spring', stiffness: 260, damping: 24 } as const;
 
@@ -220,7 +221,7 @@ export default function PartnerHub() {
                         <Copy size={13} /> {L('Copy', 'انسخ')}
                       </button>
                       <a
-                        href={`https://wa.me/?text=${encodeURIComponent(L(`Join our gym on PULSE: ${invite.url}`, `انضم لجيمنا على PULSE: ${invite.url}`))}`}
+                        href={`https://wa.me/?text=${encodeURIComponent(L(`Join our gym on ${BRAND_NAME}: ${invite.url}`, `انضم لجيمنا على PULSE: ${invite.url}`))}`}
                         target="_blank"
                         rel="noreferrer"
                         className="flex flex-1 items-center justify-center gap-1 rounded-full bg-emerald-500 px-3 py-2 text-xs font-bold"

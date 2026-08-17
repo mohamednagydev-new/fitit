@@ -7,7 +7,7 @@ import { countryFilter, countryForRequest } from '../lib/geo';
 /**
  * The venue directory — gyms, studios and clinics.
  *
- * PULSE never touches the transaction here either: we list the place, count the
+ * FIT IT never touches the transaction here either: we list the place, count the
  * intro, and the user walks in and pays them directly. What makes this worth a
  * partner's money is not the listing, it is that `views` and `contacts` give them a
  * number they can check against their own front desk.

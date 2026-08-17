@@ -5,6 +5,7 @@ import TopBar from '../components/TopBar';
 import AmbientBg from '../components/AmbientBg';
 import { markSpot, spotSeen } from '../lib/spotlight';
 import ScreenshotRail from '../components/ScreenshotRail';
+import { BRAND_NAME } from '../lib/brand';
 
 const spring = { type: 'spring', stiffness: 260, damping: 24 } as const;
 
@@ -42,7 +43,7 @@ const TILES: Tile[] = [
   { key: 'wellness', emoji: '🧘', ar: 'صحتك', en: 'Wellness', hookAr: 'نوم وضغط وسكر — مقالات تثق فيها', hookEn: 'Sleep, stress, sugar — articles you can trust', to: '/wellness' },
   { key: 'events', emoji: '📅', ar: 'الأحداث', en: 'Events', hookAr: 'تحديات ومناسبات المجتمع', hookEn: 'Community challenges and moments', to: '/events' },
   { key: 'coachtools', emoji: '🧑‍🏫', ar: 'أدوات المدرب', en: 'Coach tools', hookAr: 'لينك دعوة ولوحة عملاء ورسايل جماعية', hookEn: 'Invite link, client dashboard, broadcast', to: '/coach-dashboard' },
-  { key: 'gymboard', emoji: '📺', ar: 'جيمك على PULSE', en: 'Your gym on PULSE', hookAr: 'كود أعضاء وترتيب وشاشة أبطال لايف', hookEn: 'Member code, leaderboard & live TV board', to: '/gyms' },
+  { key: 'gymboard', emoji: '📺', ar: 'جيمك على PULSE', en: `Your gym on ${BRAND_NAME}`, hookAr: 'كود أعضاء وترتيب وشاشة أبطال لايف', hookEn: 'Member code, leaderboard & live TV board', to: '/gyms' },
 ];
 
 export default function Features() {

@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { motion } from 'framer-motion';
 import { Flame, Trophy, Users, Zap } from 'lucide-react';
 import { MediaImage } from '../components/ui';
+import { BRAND_NAME, SITE_ORIGIN } from '../lib/brand';
 
 const spring = { type: 'spring', stiffness: 260, damping: 24 } as const;
 
@@ -98,7 +99,7 @@ export default function TvBoard() {
                 {data.gym.nameAr ?? data.gym.name}
               </h1>
               <p className="text-[1.2vw] font-semibold text-white/40 lg:text-lg" dir="ltr">
-                {data.gym.name} · PULSE
+                {data.gym.name} · {BRAND_NAME}
               </p>
             </div>
             <div className="text-end">
@@ -225,7 +226,7 @@ export default function TvBoard() {
                 <p className="mt-1 text-[3.4vw] font-black tabular-nums leading-none text-sky-300 lg:text-6xl" dir="ltr">
                   {data.memberCount.toLocaleString()}
                 </p>
-                <p className="mt-1 text-[0.9vw] text-white/40 lg:text-sm" dir="ltr">members on PULSE</p>
+                <p className="mt-1 text-[0.9vw] text-white/40 lg:text-sm" dir="ltr">members on {BRAND_NAME}</p>
               </div>
 
               {/* Join QR — the poster that recruits for the gym while it hangs there */}
@@ -242,7 +243,7 @@ export default function TvBoard() {
                       كل تمرينة بتتحسبلك نقط… وممكن اسمك يطلع هنا
                     </p>
                     <p className="mt-1 text-[0.85vw] text-white/35 lg:text-xs" dir="ltr">
-                      Scan to join {data.gym.name} on PULSE
+                      Scan to join {data.gym.name} on {BRAND_NAME}
                     </p>
                   </div>
                 </div>
@@ -252,7 +253,7 @@ export default function TvBoard() {
 
           {/* Footer strip */}
           <p className="mt-[1.5vw] text-center text-[0.9vw] font-semibold text-white/25 lg:text-sm" dir="ltr">
-            PULSE · pulse.geddo.online — board refreshes every minute
+            {BRAND_NAME} · {SITE_ORIGIN.replace(/^https?:\/\//, '')} — board refreshes every minute
           </p>
         </div>
       )}

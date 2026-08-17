@@ -24,6 +24,7 @@ import MenuDrawer from '../components/MenuDrawer';
 import ScreenHeader from '../components/ScreenHeader';
 import VideoPlayer from '../components/VideoPlayer';
 import CountUp from '../components/CountUp';
+import { BRAND_NAME } from '../lib/brand';
 
 const spring = { type: 'spring', stiffness: 260, damping: 24 } as const;
 
@@ -92,7 +93,7 @@ export default function Home() {
               icon counts on either side. */}
           <span className="pointer-events-none absolute inset-x-0 top-1/2 flex -translate-y-1/2 flex-col items-center justify-center">
             <img src="/pwa-192.png" alt="" className="h-7 w-7 rounded-lg shadow" />
-            <span className="mt-0.5 text-[11px] font-extrabold italic tracking-[0.2em]">PULSE</span>
+            <span className="mt-0.5 text-[11px] font-extrabold italic tracking-[0.2em]">{BRAND_NAME}</span>
           </span>
           <div className="relative flex items-center gap-3.5">
             <ThemeToggle />

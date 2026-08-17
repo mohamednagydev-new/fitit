@@ -18,7 +18,7 @@ import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const DIST = path.join(__dirname, '..', 'apps', 'web', 'dist');
-const BASE = 'https://pulse.geddo.online';
+const BASE = process.env.WEB_ORIGIN || 'https://fitit.grand-hub.com';
 
 const prisma = new PrismaClient();
 
@@ -80,16 +80,16 @@ footer a{color:#78716c}
 function page({ url, title, description, image, ld, bodyHtml, campaign }) {
   const cta = `${BASE}/welcome?utm_source=seo&utm_medium=organic&utm_campaign=${campaign}`;
   return `<!doctype html>
-<html lang="ar" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>${esc(title)} | PULSE</title>
+<title>${esc(title)} | FIT IT</title>
 <meta name="description" content="${esc(description)}">
 <link rel="canonical" href="${url}">
 <link rel="icon" href="/pwa-192.png">
 <meta property="og:type" content="article">
-<meta property="og:site_name" content="PULSE">
+<meta property="og:site_name" content="FIT IT">
 <meta property="og:title" content="${esc(title)}">
 <meta property="og:description" content="${esc(description)}">
 <meta property="og:url" content="${url}">
@@ -100,25 +100,25 @@ function page({ url, title, description, image, ld, bodyHtml, campaign }) {
 </head>
 <body>
 <header class="top">
-  <a class="brand" href="${BASE}/blog/"><img src="/pwa-192.png" alt="PULSE">PULSE</a>
-  <a class="cta" href="${cta}">جرّب التطبيق مجانًا 💪</a>
+  <a class="brand" href="${BASE}/blog/"><img src="/pwa-192.png" alt="FIT IT">FIT IT</a>
+  <a class="cta" href="${cta}">Try the app free 💪</a>
 </header>
 <div class="wrap">
 ${bodyHtml}
 <footer>
-  <p>PULSE — كوتشك المصري في بيتك. تمارين، سعرات بالأكل المصري، تحديات — مجاني ١٠٠٪.</p>
-  <p><a href="${BASE}/blog/">كل المقالات والوصفات</a> · <a href="${BASE}/welcome">عن التطبيق</a></p>
+  <p>FIT IT — your free fitness coach. Workouts, calorie tracking and challenges — 100% free.</p>
+  <p><a href="${BASE}/blog/">All articles & recipes</a> · <a href="${BASE}/welcome">About the app</a></p>
 </footer>
 </div>
-<div class="bar"><a href="${cta}">افتح PULSE — مجاني من المتصفح، من غير تحميل ⚡</a></div>
+<div class="bar"><a href="${cta}">Open FIT IT — free in your browser, no download ⚡</a></div>
 </body>
 </html>`;
 }
 
 const relatedHtml = (items, kind) =>
   items.length
-    ? `<div class="related"><h3>${kind === 'article' ? 'اقرا كمان' : 'جرّب كمان'}</h3>${items
-        .map((r) => `<a href="${BASE}/${kind}/${r.id}/">${esc(r.titleAr ?? r.title)}</a>`)
+    ? `<div class="related"><h3>${kind === 'article' ? 'Read next' : 'Try next'}</h3>${items
+        .map((r) => `<a href="${BASE}/${kind}/${r.id}/">${esc(r.title ?? r.titleAr)}</a>`)
         .join('')}</div>`
     : '';
 
@@ -151,13 +151,13 @@ async function main() {
         description: excerpt,
         image: img(a.coverImage),
         inLanguage: 'ar',
-        publisher: { '@type': 'Organization', name: 'PULSE', logo: { '@type': 'ImageObject', url: `${BASE}/pwa-512.png` } },
+        publisher: { '@type': 'Organization', name: 'FIT IT', logo: { '@type': 'ImageObject', url: `${BASE}/pwa-512.png` } },
         mainEntityOfPage: url,
       },
       bodyHtml: `
 ${a.coverImage ? `<img class="cover" src="${img(a.coverImage)}" alt="${esc(title)}">` : ''}
 <h1>${esc(title)}</h1>
-<p class="meta">${esc(a.category?.titleAr ?? a.category?.title ?? '')} · مكتبة PULSE الصحية</p>
+<p class="meta">${esc(a.category?.title ?? a.category?.titleAr ?? '')} · FIT IT wellness library</p>
 ${excerpt ? `<p class="excerpt">${esc(excerpt)}</p>` : ''}
 <article>${prose(body)}</article>
 ${relatedHtml(related, 'article')}`,
@@ -169,7 +169,7 @@ ${relatedHtml(related, 'article')}`,
   }
 
   for (const r of recipes) {
-    const title = r.titleAr ?? r.title;
+    const title = r.title ?? r.titleAr;
     const about = r.aboutAr ?? r.about ?? '';
     const ingredients = (() => { try { return JSON.parse(r.ingredientsAr ?? r.ingredients ?? '[]'); } catch { return []; } })();
     const steps = (() => { try { return JSON.parse(r.stepsAr ?? r.steps ?? '[]'); } catch { return []; } })();
@@ -178,7 +178,7 @@ ${relatedHtml(related, 'article')}`,
     const html = page({
       url,
       title,
-      description: about || `${title} — وصفة صحية بالسعرات والماكروز من PULSE`,
+      description: about || `${title}  — a healthy recipe with calories & macros from FIT IT`,
       image: img(r.coverImage),
       campaign: 'recipe',
       ld: {
@@ -196,7 +196,7 @@ ${relatedHtml(related, 'article')}`,
       bodyHtml: `
 ${r.coverImage ? `<img class="cover" src="${img(r.coverImage)}" alt="${esc(title)}">` : ''}
 <h1>${esc(title)}</h1>
-<p class="meta">${esc(r.category?.titleAr ?? r.category?.title ?? '')} · مطبخ PULSE</p>
+<p class="meta">${esc(r.category?.title ?? r.category?.titleAr ?? '')} · FIT IT kitchen</p>
 <div class="facts">
 ${r.calories ? `<span>🔥 ${r.calories} سعرة</span>` : ''}
 ${r.protein ? `<span>💪 ${r.protein} جم بروتين</span>` : ''}
@@ -216,24 +216,24 @@ ${relatedHtml(related, 'recipe')}`,
   // ---- The hub: /blog — the crawl entry that links to EVERYTHING ----
   const cats = new Map();
   for (const a of articles) {
-    const key = a.category?.titleAr ?? a.category?.title ?? 'مقالات';
+    const key = a.category?.title ?? a.category?.titleAr ?? 'مقالات';
     if (!cats.has(key)) cats.set(key, []);
     cats.get(key).push(`<a href="${BASE}/article/${a.id}/">${esc(a.titleAr ?? a.title)}<span class="sub">${esc((a.excerptAr ?? a.excerpt ?? '').slice(0, 90))}</span></a>`);
   }
-  const recipeLinks = recipes.map((r) => `<a href="${BASE}/recipe/${r.id}/">${esc(r.titleAr ?? r.title)}<span class="sub">${r.calories ? `${r.calories} سعرة` : ''}${r.prepTimeMin ? ` · ${r.prepTimeMin} دقيقة` : ''}</span></a>`);
+  const recipeLinks = recipes.map((r) => `<a href="${BASE}/recipe/${r.id}/">${esc(r.title ?? r.titleAr)}<span class="sub">${r.calories ? `${r.calories} سعرة` : ''}${r.prepTimeMin ? ` · ${r.prepTimeMin} دقيقة` : ''}</span></a>`);
 
   const hub = page({
     url: `${BASE}/blog`,
-    title: 'مكتبة PULSE — مقالات صحية ووصفات بالعربي',
+    title: 'FIT IT Library — health articles & healthy recipes',
     description: `${articles.length} مقال صحي و${recipes.length} وصفة بالسعرات — نوم، تخسيس، تمارين، أكل صحي مصري. مجاني بالكامل.`,
     image: `${BASE}/pwa-512.png`,
     campaign: 'blog-hub',
-    ld: { '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'مكتبة PULSE الصحية', inLanguage: 'ar' },
+    ld: { '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'FIT IT Wellness Library', inLanguage: 'en' },
     bodyHtml: `
-<h1>مكتبة PULSE الصحية 📚</h1>
-<p class="excerpt">${articles.length} مقال و${recipes.length} وصفة — مكتوبين بالعربي، ببساطة، ومن غير كلام كبير.</p>
+<h1>FIT IT Wellness Library 📚</h1>
+<p class="excerpt">${articles.length} articles and ${recipes.length} recipes — written simply, no jargon.</p>
 ${[...cats.entries()].map(([cat, links]) => `<h2>${esc(cat)}</h2><div class="grid">${links.join('')}</div>`).join('')}
-<h2>🍽 وصفات المطبخ الصحي</h2><div class="grid">${recipeLinks.join('')}</div>`,
+<h2>🍽 Healthy kitchen recipes</h2><div class="grid">${recipeLinks.join('')}</div>`,
   });
   fs.mkdirSync(path.join(DIST, 'blog'), { recursive: true });
   fs.writeFileSync(path.join(DIST, 'blog', 'index.html'), hub);

@@ -7,5 +7,5 @@ export const BRAND = (import.meta.env.VITE_BRAND as string) || 'fitit';
 export const BRAND_NAME = (import.meta.env.VITE_BRAND_NAME as string) || 'FIT IT';
 /** English-only brand: i18n is pinned to English, no language toggle. */
 export const BRAND_LANG = (import.meta.env.VITE_BRAND_LANG as string) || 'en';
-export const SITE_ORIGIN = (import.meta.env.VITE_SITE_ORIGIN as string) || 'https://fitit.geddo.online';
+export const SITE_ORIGIN = (import.meta.env.VITE_SITE_ORIGIN as string) || 'https://fitit.grand-hub.com';
 export const ENGLISH_ONLY = BRAND_LANG === 'en';

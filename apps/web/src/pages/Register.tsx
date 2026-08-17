@@ -9,6 +9,7 @@ import { utmMeta } from '../lib/utm';
 import { pixelRegistration } from '../lib/pixels';
 import { isInAppBrowser } from '../lib/install';
 import LanguageToggle from '../components/LanguageToggle';
+import { BRAND_NAME } from '../lib/brand';
 
 function GoogleLogo() {
   return (
@@ -81,7 +82,7 @@ export default function Register() {
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <img src="/pwa-192.png" alt="" className="h-9 w-9 rounded-xl shadow-lg" />
-            <span className="text-2xl font-extrabold italic">PULSE</span>
+            <span className="text-2xl font-extrabold italic">{BRAND_NAME}</span>
             <span className="rounded-full bg-white/20 px-2.5 py-1 text-[10px] font-extrabold tracking-wide backdrop-blur">
               {t('guest.cta')}
             </span>

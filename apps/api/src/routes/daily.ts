@@ -161,7 +161,7 @@ function pickQuests(userId: string, day: string): Quest[] {
 // user can do (friends train together). New users who haven't referred anyone
 // yet get this pinned as their first quest slot instead of a random pick.
 const INVITE_QUEST: Quest = {
-  key: 'invite', en: 'Invite a friend to PULSE', ar: 'اعزم صاحبك على PULSE', icon: '🎁', target: 1,
+  key: 'invite', en: 'Invite a friend to FIT IT', ar: 'اعزم صاحبك على FIT IT', icon: '🎁', target: 1,
   progress: (userId) => prisma.user.count({ where: { referredById: userId } }),
 };
 

@@ -8,6 +8,7 @@ import { toast } from '../lib/toast';
 import { Loader, EmptyState, ErrorMsg } from '../components/ui';
 import ScreenHeader from '../components/ScreenHeader';
 import WaShareButton from '../components/WaShare';
+import { BRAND_NAME } from '../lib/brand';
 
 const spring = { type: 'spring', stiffness: 260, damping: 24 } as const;
 
@@ -60,7 +61,7 @@ export default function Routines() {
     );
     return isAr
       ? `روتين «${r.title}» بتاعي على PULSE 💪\n${lines.join('\n')}\nجرّبه — التطبيق مجاني ١٠٠٪:\n${window.location.origin}`
-      : `My "${r.title}" routine on PULSE 💪\n${lines.join('\n')}\nTry it — the app is 100% free:\n${window.location.origin}`;
+      : `My "${r.title}" routine on ${BRAND_NAME} 💪\n${lines.join('\n')}\nTry it — the app is 100% free:\n${window.location.origin}`;
   };
 
   return (

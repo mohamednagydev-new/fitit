@@ -1,4 +1,8 @@
 import { toast } from './toast';
+import { BRAND_NAME, SITE_ORIGIN } from './brand';
+
+/** Bare host for display on rendered cards (e.g. "fitit.grand-hub.com"). */
+const SITE_HOST = SITE_ORIGIN.replace(/^https?:\/\//, '');
 
 interface CardOpts {
   title: string;
@@ -41,7 +45,7 @@ async function renderCard(opts: CardOpts): Promise<Blob | null> {
 
   ctx.fillStyle = 'rgba(255,255,255,0.95)';
   ctx.font = 'italic 800 86px Poppins, Arial, sans-serif';
-  ctx.fillText('PULSE', size / 2, 190);
+  ctx.fillText(BRAND_NAME, size / 2, 190);
 
   ctx.font = '260px Arial';
   ctx.fillText(opts.emoji, size / 2, size / 2 + 40);
@@ -69,7 +73,7 @@ export async function shareImageCard(opts: CardOpts): Promise<'shared' | 'downlo
   const nav = navigator as any;
   if (nav.canShare && nav.canShare({ files: [file] })) {
     try {
-      await nav.share({ files: [file], title: opts.title, text: `${opts.title} — PULSE` });
+      await nav.share({ files: [file], title: opts.title, text: `${opts.title} — ${BRAND_NAME}` });
       return 'shared';
     } catch {
       return 'failed';
@@ -196,10 +200,10 @@ function renderMilestone(opts: MilestoneOpts): Promise<Blob | null> {
   // Footer wordmark
   ctx.fillStyle = '#f97316';
   ctx.font = `italic 800 72px ${FONTS}`;
-  ctx.fillText('PULSE', cx, H - 170);
+  ctx.fillText(BRAND_NAME, cx, H - 170);
   ctx.fillStyle = 'rgba(255,255,255,0.5)';
   ctx.font = `500 34px ${FONTS}`;
-  ctx.fillText('pulse.geddo.online', cx, H - 105);
+  ctx.fillText(SITE_HOST, cx, H - 105);
 
   return new Promise((resolve) => canvas.toBlob((b) => resolve(b), 'image/png'));
 }
@@ -212,7 +216,7 @@ export async function shareMilestone(opts: MilestoneOpts): Promise<void> {
     if (!blob) return;
     const file = new File([blob], 'pulse-milestone.png', { type: 'image/png' });
     if (navigator.canShare?.({ files: [file] })) {
-      await navigator.share({ files: [file], title: opts.title, text: `${opts.title} — PULSE` });
+      await navigator.share({ files: [file], title: opts.title, text: `${opts.title} — ${BRAND_NAME}` });
       return;
     }
     const url = URL.createObjectURL(blob);

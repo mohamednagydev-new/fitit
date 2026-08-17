@@ -11,6 +11,7 @@ import { track } from '../lib/track';
 import { utmMeta } from '../lib/utm';
 import { pixelViewContent } from '../lib/pixels';
 import ScreenshotRail from '../components/ScreenshotRail';
+import { BRAND_NAME } from '../lib/brand';
 
 /**
  * The pitch page — what a stranger from an ad sees first. Real screenshots,
@@ -32,7 +33,7 @@ const FEATURES = [
     img: '/landing/tracker.jpg',
     icon: Mic,
     tint: 'from-orange-500 to-amber-500',
-    en: ['Say it, we count it', 'Log koshari, foul, ta3meya by VOICE — Egyptian foods with real calories, water tracking, daily targets.'],
+    en: ['Say it, we count it', 'Log your meals by VOICE — everyday foods with real calories, water tracking, daily targets.'],
     ar: ['قول أكلت إيه وإحنا نحسب', 'سجّل كشري وفول وطعمية بالصوت 🎤 — أكل مصري بسعراته الحقيقية، عدّاد مياه، وهدف يومي.'],
   },
   {
@@ -53,7 +54,7 @@ const FEATURES = [
     img: '/landing/challenge.jpg',
     icon: Trophy,
     tint: 'from-violet-500 to-purple-600',
-    en: ["You won't train alone", 'Challenges with badges, weekly XP leagues, 1v1 duels with friends, and live group sessions with Coach PULSE.'],
+    en: ["You won't train alone", `Challenges with badges, weekly XP leagues, 1v1 duels with friends, and live group sessions with Coach ${BRAND_NAME}.`],
     ar: ['مش هتتمرن لوحدك', 'تحديات ببادجات، دوري أسبوعي بالنقط، تحدي ١ضد١ مع صاحبك، وحصص لايف جماعية مع كوتش PULSE.'],
   },
 ];
@@ -112,8 +113,8 @@ export default function Landing() {
       {/* Top bar */}
       <div className="flex items-center justify-between px-5" style={{ paddingTop: 'calc(env(safe-area-inset-top, 0px) + 1.25rem)' }}>
         <div className="flex items-center gap-2">
-          <img src="/pwa-192.png" alt="PULSE" className="h-9 w-9 rounded-xl shadow-lg" />
-          <span className="text-2xl font-extrabold italic">PULSE</span>
+          <img src="/pwa-192.png" alt={BRAND_NAME} className="h-9 w-9 rounded-xl shadow-lg" />
+          <span className="text-2xl font-extrabold italic">{BRAND_NAME}</span>
           <span className="rounded-full bg-white/20 px-2.5 py-1 text-[10px] font-extrabold tracking-wide backdrop-blur">
             {L('100% FREE', 'مجاني ١٠٠٪')}
           </span>
@@ -129,11 +130,11 @@ export default function Landing() {
       {/* Hero */}
       <div className="px-6 pt-8 text-center">
         <motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={spring} className="text-3xl font-extrabold leading-tight">
-          {L('Your Egyptian coach, right in your home', 'كوتشك المصري في بيتك')} 🇪🇬
+          {L('Your coach, right in your pocket', 'كوتشك المصري في بيتك')}
         </motion.h1>
         <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ ...spring, delay: 0.08 }} className="mx-auto mt-3 max-w-sm text-sm text-white/80">
           {L(
-            'Workouts, Egyptian food tracking, challenges and a community that keeps you going — free, no card, no subscription.',
+            'Workouts, food and calorie tracking, challenges and a community that keeps you going — free, no card, no subscription.',
             'تمارين، حساب سعرات بالأكل المصري، تحديات، وناس بتشد بعضها — ببلاش، من غير فيزا ولا اشتراك.',
           )}
         </motion.p>
@@ -162,9 +163,9 @@ export default function Landing() {
       {/* Stats band */}
       <motion.div {...reveal} className="mx-5 mt-10 grid grid-cols-3 gap-2 rounded-2xl bg-white/10 p-4 text-center backdrop-blur">
         {[
-          { n: 154, label: L('Egyptian foods', 'أكلة مصرية') },
+          { n: 154, label: L('Everyday foods', 'أكلة مصرية') },
           { n: 90, label: L('Healthy recipes', 'وصفة صحية'), plus: true },
-          { n: 120, label: L('Arabic articles', 'مقال بالعربي'), plus: true },
+          { n: 120, label: L('Expert articles', 'مقال بالعربي'), plus: true },
         ].map((s) => (
           <div key={s.label}>
             <p className="font-display text-2xl font-extrabold">
@@ -269,8 +270,8 @@ export default function Landing() {
             tint: 'from-orange-500 to-amber-500',
             title: L('Food & calories', 'الأكل والسعرات'),
             items: [
-              L('Say what you ate — voice logging in Arabic 🎤', 'قول أكلت إيه — تسجيل بالصوت بالعربي 🎤'),
-              L('154 Egyptian foods with real calories', '١٥٤ أكلة مصرية بسعراتها الحقيقية'),
+              L('Say what you ate — voice logging 🎤', 'قول أكلت إيه — تسجيل بالصوت بالعربي 🎤'),
+              L('154 everyday foods with real calories', '١٥٤ أكلة مصرية بسعراتها الحقيقية'),
               L('Meal plans that explain every choice', 'خطط وجبات بتشرح كل اختيار'),
               L('Auto grocery list from your plan', 'قايمة مشتريات جاهزة من خطتك'),
               L('90+ healthy recipes with videos', '٩٠+ وصفة صحية بالفيديو'),
@@ -297,7 +298,7 @@ export default function Landing() {
             tint: 'from-violet-500 to-purple-600',
             title: L('Motivation', 'التحفيز'),
             items: [
-              L('Challenges with badges (join with a code!)', 'تحديات ببادجات — ادخل بكود زي PULSE14'),
+              L('Challenges with badges (join with a code!)', 'تحديات ببادجات — ادخل بكود زي FITIT14'),
               L('Weekly XP league: promotion & relegation', 'دوري أسبوعي بالنقط — صعود وهبوط'),
               L('Walking challenges — log walks, climb the board', 'تحديات مشي — سجّل مشاويرك واطلع في الترتيب'),
               L('Streaks, daily quests & a spin wheel', 'سلسلة أيام، مهام يومية، وعجلة حظ'),

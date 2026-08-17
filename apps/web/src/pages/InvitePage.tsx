@@ -9,6 +9,7 @@ import { useAuth } from '../store/auth';
 import { MediaImage, Loader, EmptyState } from '../components/ui';
 import ScreenHeader from '../components/ScreenHeader';
 import Confetti from '../components/Confetti';
+import { BRAND_NAME } from '../lib/brand';
 
 const spring = { type: 'spring', stiffness: 260, damping: 24 } as const;
 
@@ -110,7 +111,7 @@ export default function InvitePage() {
           {L('You’re invited!', 'انت معزوم!')}
         </motion.h1>
         <p className="mt-1 text-sm text-white/80">
-          {isGym ? L('Your gym is on PULSE', 'جيمك على بالس') : L('Your coach is on PULSE', 'مدربك على بالس')}
+          {isGym ? L(`Your gym is on ${BRAND_NAME}`, 'جيمك على بالس') : L(`Your coach is on ${BRAND_NAME}`, 'مدربك على بالس')}
         </p>
       </ScreenHeader>
 
@@ -161,7 +162,7 @@ export default function InvitePage() {
                 )}
                 <p className="mt-1 text-xs text-white/75">
                   {isGym
-                    ? L(`${(preview as any).members} members on PULSE`, `${(preview as any).members} عضو على بالس`)
+                    ? L(`${(preview as any).members} members on ${BRAND_NAME}`, `${(preview as any).members} عضو على بالس`)
                     : L(`${(preview as any).clients} clients training with them`, `${(preview as any).clients} متدرب بيتمرنوا معاه`)}
                 </p>
               </div>

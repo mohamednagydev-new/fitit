@@ -8,13 +8,14 @@ import { api } from '../lib/api';
 import LanguageToggle from '../components/LanguageToggle';
 import { track } from '../lib/track';
 import { utmMeta } from '../lib/utm';
+import { BRAND_NAME } from '../lib/brand';
 
 // chips: three concrete features per slide, [en, ar] — shown as small pills in
 // the card so the pitch is specifics, not slogans.
 const slides: { titleKey: string; textKey: string; g: string; Icon: LucideIcon; chips: [string, string][] }[] = [
   {
     titleKey: 'onboarding.slide1Title', textKey: 'onboarding.slide1Body', g: 'from-orange-600 via-orange-700 to-slate-900', Icon: Flame,
-    chips: [['Log food by voice 🎤', 'سجّل أكلك بالصوت 🎤'], ['Egyptian foods + calories', 'أكل مصري بسعراته'], ['Water tracker', 'عدّاد مياه']],
+    chips: [['Log food by voice 🎤', 'سجّل أكلك بالصوت 🎤'], ['Everyday foods + calories', 'أكل مصري بسعراته'], ['Water tracker', 'عدّاد مياه']],
   },
   {
     titleKey: 'onboarding.slide2Title', textKey: 'onboarding.slide2Body', g: 'from-blue-700 via-blue-800 to-slate-900', Icon: Dumbbell,
@@ -87,7 +88,7 @@ export default function Onboarding() {
       <div className="relative z-10 flex min-h-screen flex-col">
         <div className="flex items-center justify-between px-6 pt-12" style={{ paddingTop: 'calc(env(safe-area-inset-top, 0px) + 3rem)' }}>
           <div className="flex items-center gap-2">
-            <div className="text-2xl font-extrabold italic">PULSE</div>
+            <div className="text-2xl font-extrabold italic">{BRAND_NAME}</div>
             {/* The strongest hook we have — say it before anything else. */}
             <span className="rounded-full bg-white/20 px-2.5 py-1 text-[10px] font-extrabold tracking-wide backdrop-blur">
               {rtl ? 'مجاني ١٠٠٪' : '100% FREE'}

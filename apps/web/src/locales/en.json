@@ -1,6 +1,6 @@
 {
   "app": {
-    "name": "PULSE",
+    "name": "FIT IT",
     "tagline": "A Fresh Start To Get Healthy"
   },
   "nav": {
@@ -41,7 +41,7 @@
     "enabling": "Turning on…",
     "done": "Done! You'll hear from us at the right moments 💪",
     "failed": "Couldn't turn on notifications — try again from Settings",
-    "iosTitle": "Get PULSE on your Home Screen 📲",
+    "iosTitle": "Get FIT IT on your Home Screen 📲",
     "iosBody": "On iPhone: tap the Share button below, then \"Add to Home Screen\". You get the full app + workout reminders and messages."
   },
   "gs": {
@@ -53,7 +53,7 @@
     "buddy": "Add a training buddy",
     "whatIsThis": "What is all this? The 2-minute guide",
     "invite": "Invite a friend — you both get a streak freeze 🎁",
-    "inviteMsg": "Training with PULSE — a free Egyptian fitness app 💪 Join me and we both get rewards: {{link}}"
+    "inviteMsg": "Training with FIT IT — a free fitness app 💪 Join me and we both get rewards: {{link}}"
   },
   "guest": {
     "bar": "You're browsing as a guest — join free to train, track and compete",
@@ -91,7 +91,7 @@
     "startJourney": "Start your journey 💪",
     "startJourneySub": "30 seconds and you're in — free forever",
     "browseFirst": "Look around first — no account needed",
-    "webviewGoogle": "Google sign-in doesn't work inside the Facebook/TikTok browser — sign up with email below, or open pulse.geddo.online in Chrome/Safari.",
+    "webviewGoogle": "Google sign-in doesn't work inside the Facebook/TikTok browser — sign up with email below, or open fitit.grand-hub.com in Chrome/Safari.",
     "createNew": "Create new one",
     "haveAccount": "Already have an account?",
     "tagline": "A Fresh Start To Get Healthy",
@@ -119,7 +119,7 @@
   },
   "home": {
     "fitForLife": "Fit For Life",
-    "coaches": "PULSE Coaches",
+    "coaches": "FIT IT Coaches",
     "prepareMeal": "Prepare Your Meal",
     "workout": "WORKOUT",
     "challenges": "Challenges worth joining",
@@ -131,7 +131,7 @@
   },
   "programs": {
     "welcome": "Welcome To",
-    "title": "PULSE Programs",
+    "title": "FIT IT Programs",
     "motto": "Stay focused · Train hard · Keep grinding",
     "yoga": "Yoga",
     "workout": "Workout",
@@ -209,13 +209,13 @@
     "freeDesc": "Every workout, coach, plan and live session is free. There is no paid version to upgrade to.",
     "supportDesc": "Something broken, confusing, or missing? Tell us and we'll read it — we reply within 24 hours.",
     "deleteAccount": "Delete my account",
-    "deleteConfirm1": "Delete your PULSE account? All your data — workouts, streaks, chats, photos — will be permanently erased.",
+    "deleteConfirm1": "Delete your FIT IT account? All your data — workouts, streaks, chats, photos — will be permanently erased.",
     "deletePw": "Enter your password to confirm (leave empty if you signed up with Google):",
     "deleteConfirm2": "Last check: this CANNOT be undone. Delete forever?"
   },
   "ai": {
     "coach": "AI Coach",
-    "ask": "Ask the PULSE Coach…",
+    "ask": "Ask the FIT IT Coach…",
     "generatePlan": "Generate my plan",
     "notConfigured": "AI features are not configured yet."
   },
@@ -382,19 +382,19 @@
   },
   "gate": {
     "title": "Built for your phone",
-    "desc": "PULSE is a mobile experience — swipe workouts, reels, and your coach in your pocket.",
+    "desc": "FIT IT is a mobile experience — swipe workouts, reels, and your coach in your pocket.",
     "scan": "Scan with your phone camera",
     "cont": "Continue on desktop anyway"
   },
   "install": {
-    "title": "Install PULSE",
+    "title": "Install FIT IT",
     "desc": "Full-screen, faster, works like a real app",
     "btn": "Install",
-    "iosTitle": "Install PULSE on iPhone",
+    "iosTitle": "Install FIT IT on iPhone",
     "ios1": "Tap the Share button in Safari",
     "ios2": "Choose Add to Home Screen",
-    "ios3": "Open PULSE from your home screen",
-    "menuTitle": "Install PULSE",
+    "ios3": "Open FIT IT from your home screen",
+    "menuTitle": "Install FIT IT",
     "menu1": "Open the browser menu (⋮)",
     "menu2": "Tap Add to Home screen (or Install app)",
     "escapeTitle": "Open in your browser first",
@@ -459,17 +459,17 @@
     "website": "Visit website",
     "map": "Directions",
     "instagram": "Instagram",
-    "offlineNote": "Ordering happens directly with the partner — PULSE does not sell or ship products.",
+    "offlineNote": "Ordering happens directly with the partner — FIT IT does not sell or ship products.",
     "empty": "No offers yet — check back soon.",
     "from": "from",
-    "partnerOf": "Partner of PULSE"
+    "partnerOf": "Partner of FIT IT"
   },
   "help": {
-    "title": "How PULSE works",
+    "title": "How FIT IT works",
     "forYou": "For you",
     "forCoaches": "For coaches",
     "forPartners": "For partners",
-    "intro": "Everything PULSE offers — and how each of us benefits.",
+    "intro": "Everything FIT IT offers — and how each of us benefits.",
     "userTitle": "Everything you need, free",
     "coachTitle": "Grow as a coach — zero commission",
     "sponsorTitle": "Reach a focused fitness audience",
@@ -481,7 +481,7 @@
     "free": "100% free",
     "noFees": "No commission",
     "howTo": "How to use",
-    "howToTitle": "Your day on PULSE",
+    "howToTitle": "Your day on FIT IT",
     "howToChip": "Takes 10 minutes",
     "howToFooter": "That's the whole loop. Do it once and tomorrow takes less thinking."
   },
@@ -956,7 +956,7 @@
     "nowCoach": "You're now a coach! 🎉",
     "editIntro": "Share your expertise, publish content, and coach the community.",
     "pendingTitle": "Request sent",
-    "pendingBody": "You can build your workouts and programs now. You'll appear in the public coaches list once the PULSE team verifies your profile.",
+    "pendingBody": "You can build your workouts and programs now. You'll appear in the public coaches list once the FIT IT team verifies your profile.",
     "headline": "Headline",
     "headlinePh": "e.g. Strength & mobility coach",
     "specialties": "Specialties (comma separated)",
@@ -1026,7 +1026,7 @@
     "pinned": "Pinned",
     "report": "Report",
     "reported": "Reported — the team will review it",
-    "reportConfirm": "Report this post to the PULSE team?",
+    "reportConfirm": "Report this post to the FIT IT team?",
     "deleteConfirm": "Delete this post?",
     "postDeleted": "Post deleted",
     "commentFailed": "Comment not sent",
@@ -1064,7 +1064,7 @@
     "roomTitle": "Chat",
     "report": "Report",
     "reportWhy": "What happened? (optional)",
-    "reportConfirm": "Report this conversation to the PULSE team? Its messages will be reviewed.",
+    "reportConfirm": "Report this conversation to the FIT IT team? Its messages will be reviewed.",
     "reportDone": "Reported — our team will review it. Thank you.",
     "block": "Block",
     "blockConfirm": "Block this person? They won't be able to message or connect with you.",
@@ -1112,7 +1112,7 @@
   "coachChat": {
     "title": "AI Coach",
     "hello": "Ask me anything about training & food 💪",
-    "sub": "Answers come from PULSE's own library — not internet guesses",
+    "sub": "Answers come from FIT IT's own library — not internet guesses",
     "ph": "Type your question…",
     "send": "Send",
     "thinking": "Thinking…",
@@ -1156,14 +1156,14 @@
     "tabSearch": "Search",
     "tabRecipes": "My recipes",
     "tabScan": "Barcode",
-    "search": "Search food — fuul, koshari, chicken…",
-    "noMatch": "Nothing matched. Try the Arabic name.",
+    "search": "Search food — chicken, rice, eggs…",
+    "noMatch": "Nothing matched. Try another spelling.",
     "speak": "Say what you ate",
-    "listening": "Listening… say it, e.g. a plate of koshari",
+    "listening": "Listening… say it, e.g. a plate of rice and chicken",
     "micDenied": "Microphone is blocked — allow it in browser settings to log by voice.",
     "add": "Add to today",
     "addFood": "Add food",
-    "addFoodSub": "Egyptian portions with real numbers",
+    "addFoodSub": "Real portions with real numbers",
     "less": "Less",
     "more": "More"
   },
@@ -1171,7 +1171,7 @@
     "title": "Snap your meal",
     "sub": "Point at the plate — we estimate the rest",
     "take": "Take a photo",
-    "hint": "One plate, from above, in decent light. Works with Egyptian food.",
+    "hint": "One plate, from above, in decent light. Works with everyday food.",
     "reading": "Reading the photo…",
     "failed": "Couldn't read that photo",
     "remove": "Remove item",
@@ -1257,10 +1257,10 @@
     "trackerCtaSub": "Start a diet journey — progress bar, reminders, Friday weigh-ins"
   },
   "feat": {
-    "title": "PULSE treasures",
+    "title": "FIT IT treasures",
     "sub": "Everything the app can do — tap any tile and try it.",
     "new": "New to you",
-    "homeCta": "PULSE treasures 💎",
+    "homeCta": "FIT IT treasures 💎",
     "homeCtaSub": "Discover everything the app can do"
   },
   "spot": {
@@ -1315,7 +1315,7 @@
   "partnerHub": {
     "title": "Partner dashboard",
     "noneTitle": "No partner page linked",
-    "noneHint": "This screen is for PULSE partners (gyms, clinics, stores). Contact us to become one.",
+    "noneHint": "This screen is for FIT IT partners (gyms, clinics, stores). Contact us to become one.",
     "saved": "Saved ✓",
     "cover": "Cover",
     "logo": "Logo",
@@ -1348,7 +1348,7 @@
   "nutri": {
     "title": "AI Nutritionist 🥗",
     "hello": "Your nutritionist, ready now",
-    "sub": "I answer with YOUR real numbers — calories left today, protein gap, journey pace. Short, practical, Egyptian food first.",
+    "sub": "I answer with YOUR real numbers — calories left today, protein gap, journey pace. Short, practical, your food first.",
     "dirTitle": "No nutritionist available? Ask the AI one now",
     "dirSub": "Instant answers built on your own targets and food log"
   }

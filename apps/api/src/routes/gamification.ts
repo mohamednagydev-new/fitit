@@ -272,7 +272,7 @@ gamificationRouter.post('/challenges/:id/messages', async (req: AuthedRequest, r
     const question = parsed.data.text.replace(/@coach/i, '').trim();
     chatComplete(
       [
-        { role: 'system', content: 'You are the PULSE Coach in a group challenge chat. Be brief, motivating and practical.' },
+        { role: 'system', content: 'You are the FIT IT Coach in a group challenge chat. Be brief, motivating and practical.' },
         { role: 'user', content: question },
       ],
       { temperature: 0.6 },

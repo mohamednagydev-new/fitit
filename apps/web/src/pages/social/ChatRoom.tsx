@@ -8,6 +8,7 @@ import { getSocket } from '../../lib/socket';
 import { Loader } from '../../components/ui';
 import TopBar from '../../components/TopBar';
 import { toast } from '../../lib/toast';
+import { BRAND_NAME } from '../../lib/brand';
 
 interface Message { id: string; senderId: string; text: string | null; audioUrl?: string | null; createdAt: string }
 
@@ -157,7 +158,7 @@ export default function ChatRoom() {
 
   const reportChat = async () => {
     const reason = window.prompt(t('chat.reportWhy', { defaultValue: 'What happened? (optional)' })) ?? '';
-    if (!window.confirm(t('chat.reportConfirm', { defaultValue: 'Report this conversation to the PULSE team? Its messages will be reviewed.' }))) return;
+    if (!window.confirm(t('chat.reportConfirm', { defaultValue: `Report this conversation to the ${BRAND_NAME} team? Its messages will be reviewed.` }))) return;
     try {
       await api.post(`/api/chat/threads/${id}/report`, { reason });
       toast(t('chat.reportDone', { defaultValue: 'Reported — our team will review it. Thank you.' }), 'success');

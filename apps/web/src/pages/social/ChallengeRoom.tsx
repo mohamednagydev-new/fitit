@@ -8,6 +8,7 @@ import { getSocket } from '../../lib/socket';
 import { MediaImage, Loader } from '../../components/ui';
 import TopBar from '../../components/TopBar';
 import { toast } from '../../lib/toast';
+import { BRAND_NAME } from '../../lib/brand';
 
 /**
  * Challenge room. Opens on OVERVIEW — what the challenge is, the goal, your
@@ -264,7 +265,7 @@ export default function ChallengeRoom() {
                 <div key={m.id} className={`flex items-end gap-2 ${mine ? 'justify-end' : 'justify-start'}`}>
                   {!mine && <MediaImage path={m.user?.avatarUrl} label={m.isCoach ? '🤖' : m.user?.firstName} className="h-7 w-7 rounded-full" seed={(m.id || '').length} />}
                   <div className={`max-w-[75%] rounded-2xl px-3 py-2 text-sm ${m.isCoach ? 'bg-brand-pink/10 text-ink ring-1 ring-brand-pink/30' : mine ? 'bg-brand-blue text-white' : 'bg-white shadow-sm'}`}>
-                    {!mine && <p className="text-[11px] font-semibold opacity-70">{m.isCoach ? '🤖 PULSE Coach' : m.user?.firstName}</p>}
+                    {!mine && <p className="text-[11px] font-semibold opacity-70">{m.isCoach ? `🤖 ${BRAND_NAME} Coach` : m.user?.firstName}</p>}
                     {m.isProof && (
                       <p className={`mb-1 text-[10px] font-extrabold ${mine ? 'text-white/80' : 'text-emerald-600'}`}>📸 {t('challenge.proofBadge')}</p>
                     )}

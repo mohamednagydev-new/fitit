@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { ChevronLeft, LifeBuoy, Send } from 'lucide-react';
 import { api } from '../lib/api';
+import { BRAND_NAME } from '../lib/brand';
 
 /** Contact form for people who are NOT signed in — stuck at login/register,
  *  OAuth trouble, or just a question before creating an account. Lands in the
@@ -40,7 +41,7 @@ export default function GuestContact() {
     <div className="fitness-hero relative flex min-h-screen flex-col text-white">
       <div className="flex items-center gap-2 px-4" style={{ paddingTop: 'calc(env(safe-area-inset-top, 0px) + 1.5rem)' }}>
         <Link to="/login" aria-label={L('Back', 'رجوع')}><ChevronLeft className="rtl:rotate-180" /></Link>
-        <span className="text-xl font-extrabold italic">PULSE</span>
+        <span className="text-xl font-extrabold italic">{BRAND_NAME}</span>
       </div>
 
       <div className="mt-6 flex flex-1 flex-col rounded-t-[2rem] bg-white px-6 pb-10 pt-8 text-ink">

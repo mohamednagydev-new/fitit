@@ -17,6 +17,9 @@ import { daysAgoStr } from '../lib/time';
 export const adminRouter = Router();
 adminRouter.use(requireAuth, requireAdmin);
 
+// Bare host for display text in emails/posts (links themselves use the full WEB_ORIGIN).
+const SITE = env.WEB_ORIGIN.replace(/^https?:\/\//, '');
+
 /**
  * Best-effort, non-blocking auto-translation. After an admin writes a record we
  * fill any empty Arabic (*Ar) fields with simple spoken Egyptian Arabic. Fire-and-
@@ -268,7 +271,7 @@ adminRouter.get('/leads.csv', async (req, res) => {
     ),
   ].join('\n');
   res.setHeader('Content-Type', 'text/csv; charset=utf-8');
-  res.setHeader('Content-Disposition', 'attachment; filename="pulse-leads.csv"');
+  res.setHeader('Content-Disposition', 'attachment; filename="fitit-leads.csv"');
   res.send('﻿' + rows); // BOM so Excel reads the Arabic correctly
 });
 
@@ -480,9 +483,9 @@ adminRouter.patch('/tickets/:id', async (req, res) => {
     const replyText = String(reply).trim();
     sendMail({
       to: ticket.contact,
-      subject: `PULSE — Reply to: ${ticket.subject}`,
-      text: `${replyText}\n\n— PULSE team · pulse.geddo.online`,
-      html: `<p>${replyText.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/\n/g, '<br>')}</p><p>— PULSE team · <a href="https://pulse.geddo.online">pulse.geddo.online</a></p>`,
+      subject: `FIT IT — Reply to: ${ticket.subject}`,
+      text: `${replyText}\n\n— FIT IT team · ${SITE}`,
+      html: `<p>${replyText.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/\n/g, '<br>')}</p><p>— FIT IT team · <a href="${env.WEB_ORIGIN}">${SITE}</a></p>`,
     }).catch((e: any) => console.warn('[support] guest reply mail failed:', e?.message));
   }
   if (sendingReply && ticket.userId) {
@@ -716,7 +719,7 @@ adminRouter.post('/broadcast/suggest', async (_req, res) => {
         {
           role: 'system',
           content: [
-            'You write push notifications for PULSE, a free Egyptian fitness app (workouts, Egyptian food calories, challenges with friends, community).',
+            'You write push notifications for FIT IT, a free Egyptian fitness app (workouts, Egyptian food calories, challenges with friends, community).',
             'Produce ONE notification as strict JSON: {"title":"...","titleAr":"...","body":"...","bodyAr":"...","url":"/"}.',
             'titleAr/bodyAr: casual Egyptian Arabic (عامية مصرية), motivating, WhatsApp-friendly tone, one emoji in the title. title/body: matching English.',
             'Body under 120 characters. Vary the angle: motivation, habit tip, water, sleep, protein, challenge, comeback, invite-a-friend.',
@@ -877,7 +880,7 @@ adminRouter.get('/moderation/challenge-messages', async (_req, res) => {
       id: m.id,
       text: m.text,
       isCoach: m.isCoach,
-      by: m.isCoach ? 'Coach PULSE' : `${m.user?.firstName ?? ''} ${m.user?.lastName ?? ''}`.trim() || '—',
+      by: m.isCoach ? 'Coach FIT IT' : `${m.user?.firstName ?? ''} ${m.user?.lastName ?? ''}`.trim() || '—',
       room: m.challenge.titleAr ?? m.challenge.title,
       createdAt: m.createdAt,
     })),
@@ -941,36 +944,36 @@ adminRouter.get('/fb/suggestions', async (_req, res) => {
   ];
 
   const KNOWLEDGE_POOL = [
-    'حقيقة عن البروتين 🥚\n\nجسمك محتاج حوالي ١.٦ جرام بروتين لكل كيلو من وزنك لو بتتمرن — يعني واحد وزنه ٨٠ كيلو محتاج ~١٢٨ جرام في اليوم.\n\nمصادر رخيصة وموجودة في كل بيت مصري:\n• بيضة = ٦ جرام\n• علبة فول = ١٥ جرام\n• صدر فراخ = ٣٠ جرام\n• كوب عدس مطبوخ = ١٨ جرام\n• علبة زبادي = ١٠ جرام\n\nمش لازم مكملات ولا بودرات — لازم بس تعرف بتاكل كام. وده بالظبط اللي التطبيق بيحسبهولك ببلاش.\npulse.geddo.online\n\n#PULSE #نبض #بروتين #تغذية',
-    'ليه مش بتخس مع إنك "بتاكل كويس"؟ 🤔\n\nالسبب رقم واحد: السعرات السايلة.\nكوباية عصير مانجو = ~٢٠٠ سعرة\nلاتيه بالسكر = ~٢٥٠ سعرة\nمشروب غازي = ~١٥٠ سعرة\n\nلو بتشرب الثلاثة دول يومياً، ده ٦٠٠ سعرة زيادة — يعني كيلو دهون كل ١٢ يوم تقريباً، من غير ما تحس إنك أكلت حاجة.\n\nأول خطوة حقيقية للتخسيس: اعرف بتشرب كام قبل ما تفكر تاكل كام.\nسجّل يومك في PULSE وشوف بنفسك — مجاني.\npulse.geddo.online\n\n#PULSE #نبض #تخسيس #سعرات',
-    'قاعدة التقدم التدريجي 📈\n\nالعضلات مش بتكبر من التعب — بتكبر من التحدي المتزايد.\n\nيعني إيه؟ لو بتشيل نفس الوزن بنفس العدات كل أسبوع، جسمك اتعود وخلاص — مفيش سبب يتغير.\n\nالحل بسيط: كل أسبوع زوّد حاجة واحدة صغيرة:\n• عدّة زيادة على نفس الوزن، أو\n• كيلو زيادة على نفس العدات، أو\n• ثانية أبطأ في النزول\n\nعشان كده بنقولك سجّل أوزانك — اللي مش متسجل مش هتعرف تزوّده.\npulse.geddo.online — التسجيل جوه التطبيق ببلاش.\n\n#PULSE #نبض #كمال_اجسام #تمرين',
-    'النوم هو المكمل الغذائي الحقيقي 😴\n\nأقل من ٧ ساعات نوم بشكل مستمر بيعمل الآتي:\n• بيقلل هرمون الشبع وبيزود هرمون الجوع — بتصحى جعان أكتر\n• بيقلل قدرة العضلات على التعافي بعد التمرين\n• بيخلي جسمك يخزن دهون أسهل\n\nيعني ممكن تكون بتتمرن صح وبتاكل صح، والنوم هو اللي مضيّع مجهودك.\n\nجرب أسبوع واحد: نام ٧-٨ ساعات وشوف الفرق في طاقتك وتمرينك.\n\n#PULSE #نبض #نوم #صحة',
-    'المشي مُقدَّر بأقل من حقه 🚶\n\n٣٠ دقيقة مشي يومياً:\n• بتحرق ~١٥٠ سعرة\n• بتحسن المزاج والتركيز\n• بتقلل خطر أمراض القلب والسكر\n• ومش محتاجة جيم ولا معدات ولا فلوس\n\nلو التمرين تقيل عليك دلوقتي، ابدأ بالمشي بس. أهم حاجة في اللياقة مش الشدة — الاستمرارية.\n\nولما تكون جاهز للخطوة الجاية، إحنا موجودين — ببلاش.\npulse.geddo.online\n\n#PULSE #نبض #مشي #لياقة',
-    'يوم الراحة مش يوم كسل 🛋\n\nالعضلة بتكبر وإنت مرتاح، مش وإنت بتتمرن. التمرين بيعمل الجرح، والراحة بتبني.\n\nعلامات إنك محتاج راحة:\n• نايم كويس ولسه تعبان\n• الأوزان اللي كانت سهلة بقت تقيلة\n• عصبية ومزاج وحش من غير سبب\n\nيوم راحة ذكي: مشي خفيف + إطالات + مية كتير + نوم بدري.\nوجوه التطبيق فيه برنامج يوم راحة كامل — إطالة وتنفس ومشي.\n\n#PULSE #نبض #راحة #تعافي',
-    'إزاي تعرف إنك بتتقدم من غير ميزان؟ 📏\n\nالميزان بيكدب: ممكن تخس دهون وتكسب عضل فيثبت الرقم — وإنت فعلياً اتحسنت جداً.\n\nعلامات تقدم حقيقية:\n• الهدوم بقت أوسع\n• بتطلع السلم من غير نهجان\n• الأوزان اللي كانت تقيلة بقت عادية\n• نومك أعمق ومزاجك أحسن\n\nقيس تقدمك بحاجات كتير مش برقم واحد. التطبيق بيسجللك التمارين والأوزان والصور — وبتشوف الرحلة كلها قدامك.\npulse.geddo.online\n\n#PULSE #نبض #تقدم',
-    'الإحماء مش رفاهية ⚡\n\n٥ دقايق إحماء قبل التمرين بتعمل فرق ضخم:\n• بترفع حرارة العضلات فبتقل فرصة الإصابة\n• بتحسن أداءك في التمرين نفسه\n• بتجهز مفاصلك للأحمال\n\nإحماء بسيط: دقيقتين مشي سريع أو حبل + دورانات مفاصل + عدات خفيفة من نفس تمرينك الأول.\n\nكل جلسة في PULSE فيها الفيديو بيوريك الحركة الصح من الأول — ببلاش.\npulse.geddo.online\n\n#PULSE #نبض #احماء #تمرين',
-    'المية والتخسيس 💧\n\nمعلومة بسيطة بتفرق مع ناس كتير: العطش بيتلبس لبس الجوع.\n\nيعني ساعات بتحس إنك جعان وإنت في الحقيقة عطشان — فبتاكل ٣٠٠ سعرة وإنت كنت محتاج كوباية مية بصفر سعرات.\n\nجرب القاعدة دي: أول ما تحس بجوع بين الوجبات، اشرب كوباية مية واستنى ١٠ دقايق. لو الجوع كمل، كل. لو راح — كانت عطش.\n\nعدّاد المية جوه PULSE بيفكرك طول اليوم — ببلاش.\npulse.geddo.online\n\n#PULSE #نبض #مية #تخسيس',
-    'وجع العضلات بعد التمرين — خير ولا شر؟ 🤕\n\nالوجع اللي بييجي تاني يوم اسمه DOMS وهو طبيعي جداً، خصوصاً بعد تمرين جديد أو أول رجوع بعد غياب.\n\nحقايق مهمة:\n• الوجع مش شرط النجاح — ممكن تتمرن ممتاز من غير وجع\n• قمة الوجع بتيجي بعد ٢٤-٤٨ ساعة وبتروح لوحدها\n• أحسن علاج ليه: حركة خفيفة ومية، مش رقاد تام\n• لو الوجع في مفصل مش عضلة، أو حاد جداً — ده إنذار مش DOMS\n\nخلّي جسمك يتعود بالتدريج — وده بالظبط اللي البرامج جوه التطبيق معمولة عشانه.\npulse.geddo.online\n\n#PULSE #نبض #تمرين #تعافي',
-    'الدهون مش العدو 🥑\n\nجسمك محتاج دهون عشان الهرمونات والدماغ وامتصاص فيتامينات كاملة (A وD وE وK).\n\nالفرق في النوع والكمية:\n✅ كويسة: زيت زيتون، مكسرات، أفوكادو، سمك\n⚠️ بحساب: سمنة وزبدة\n❌ قللها جداً: مقليات المطاعم والزيوت المتحروقة المعاد استخدامها\n\nالمشكلة الحقيقية إن الدهون سعراتها عالية (٩ سعرات للجرام) — فسهل تاكل كتير من غير ما تحس.\n\nمعلقة زيت = ~١٢٠ سعرة. سجّلها عشان تعرف.\npulse.geddo.online — الحاسبة ببلاش.\n\n#PULSE #نبض #تغذية #دهون',
-    'البيت ولا الجيم؟ الإجابة العلمية 🏠🏋️\n\nالدراسات واضحة: العضلة مش عارفة إنت فين — هي عارفة بس فيه مقاومة ولا لأ.\n\nتمارين وزن الجسم (ضغط، سكوات، عقلة) بتبني عضل حقيقي لحد مستوى متقدم، خصوصاً لو بتزود الصعوبة بالتدريج.\n\nالجيم ميزته: أوزان أتقل وتنوع أكبر — مش سحر إضافي.\n\nالخلاصة: أحسن مكان للتمرين هو المكان اللي هتستمر فيه فعلاً.\nوجوه PULSE فيه برامج كاملة للاتنين — بيت من غير أي معدات، وجيم بالأوزان.\npulse.geddo.online — ببلاش.\n\n#PULSE #نبض #تمرين_في_البيت #جيم',
-    'ثبت وزنك وواقف مكانك؟ (البلاتوه) 📉\n\nده طبيعي ومش معناه إنك فشلت — جسمك اتأقلم وخلاص.\n\nليه بيحصل: لما بتخس، جسمك الأخف بيحرق أقل، فالسعرات اللي كانت بتنزّلك بقت بالظبط اللي بتثبتك.\n\n٣ حلول عملية:\n١. زوّد حركتك اليومية (مشي أكتر، سلم بدل أسانسير)\n٢. راجع تسجيل أكلك — التقديرات بتزيد مع الوقت من غير ما نحس\n٣. زوّد شدة التمرين مش مدته\n\nاللي بيسجل بيعرف فين المشكلة. اللي مش بيسجل بيفتكر جسمه "باظ".\npulse.geddo.online — سجّل ببلاش.\n\n#PULSE #نبض #تخسيس #بلاتوه',
-    'القهوة والتمرين ☕\n\nالكافيين من أكتر المكملات المثبتة علمياً — بيحسن الأداء والتركيز في التمرين فعلاً.\n\nالاستخدام الصح:\n• كوباية قهوة قبل التمرين بـ٣٠-٦٠ دقيقة\n• من غير سكر ولا لبن كامل لو هدفك تخسيس (القهوة السادة = ~٥ سعرات، اللاتيه = ٢٠٠+)\n• تجنبها بعد الساعة ٤ عصراً — الكافيين بيقعد في جسمك ٦+ ساعات وبيبوظ النوم\n\nوافتكر: النوم الكويس أهم من أي كوباية قهوة.\n\n#PULSE #نبض #قهوة #تمرين',
-    'الألياف — السلاح المنسي في التخسيس 🌾\n\nالأكل الغني بالألياف بيشبعك أكتر بسعرات أقل، وبيظبط السكر والهضم.\n\nكنوز مصرية مليانة ألياف:\n• الفول والعدس والحمص 👑\n• الجوافة والتين البرشومي\n• البامية والملوخية\n• الردة والعيش البلدي (أحسن من الفينو بكتير)\n\nهدفك: ٢٥-٣٠ جرام ألياف يومياً. طبق فول الصبح + شوربة عدس بالليل وإنت قربت توصل.\n\nوكل الأكلات دي بسعراتها الحقيقية جوه التطبيق.\npulse.geddo.online\n\n#PULSE #نبض #الياف #تغذية',
+    'حقيقة عن البروتين 🥚\n\nجسمك محتاج حوالي ١.٦ جرام بروتين لكل كيلو من وزنك لو بتتمرن — يعني واحد وزنه ٨٠ كيلو محتاج ~١٢٨ جرام في اليوم.\n\nمصادر رخيصة وموجودة في كل بيت مصري:\n• بيضة = ٦ جرام\n• علبة فول = ١٥ جرام\n• صدر فراخ = ٣٠ جرام\n• كوب عدس مطبوخ = ١٨ جرام\n• علبة زبادي = ١٠ جرام\n\nمش لازم مكملات ولا بودرات — لازم بس تعرف بتاكل كام. وده بالظبط اللي التطبيق بيحسبهولك ببلاش.\n' + SITE + '\n\n#FITIT #نبض #بروتين #تغذية',
+    'ليه مش بتخس مع إنك "بتاكل كويس"؟ 🤔\n\nالسبب رقم واحد: السعرات السايلة.\nكوباية عصير مانجو = ~٢٠٠ سعرة\nلاتيه بالسكر = ~٢٥٠ سعرة\nمشروب غازي = ~١٥٠ سعرة\n\nلو بتشرب الثلاثة دول يومياً، ده ٦٠٠ سعرة زيادة — يعني كيلو دهون كل ١٢ يوم تقريباً، من غير ما تحس إنك أكلت حاجة.\n\nأول خطوة حقيقية للتخسيس: اعرف بتشرب كام قبل ما تفكر تاكل كام.\nسجّل يومك في FIT IT وشوف بنفسك — مجاني.\n' + SITE + '\n\n#FITIT #نبض #تخسيس #سعرات',
+    'قاعدة التقدم التدريجي 📈\n\nالعضلات مش بتكبر من التعب — بتكبر من التحدي المتزايد.\n\nيعني إيه؟ لو بتشيل نفس الوزن بنفس العدات كل أسبوع، جسمك اتعود وخلاص — مفيش سبب يتغير.\n\nالحل بسيط: كل أسبوع زوّد حاجة واحدة صغيرة:\n• عدّة زيادة على نفس الوزن، أو\n• كيلو زيادة على نفس العدات، أو\n• ثانية أبطأ في النزول\n\nعشان كده بنقولك سجّل أوزانك — اللي مش متسجل مش هتعرف تزوّده.\n' + SITE + ' — التسجيل جوه التطبيق ببلاش.\n\n#FITIT #نبض #كمال_اجسام #تمرين',
+    'النوم هو المكمل الغذائي الحقيقي 😴\n\nأقل من ٧ ساعات نوم بشكل مستمر بيعمل الآتي:\n• بيقلل هرمون الشبع وبيزود هرمون الجوع — بتصحى جعان أكتر\n• بيقلل قدرة العضلات على التعافي بعد التمرين\n• بيخلي جسمك يخزن دهون أسهل\n\nيعني ممكن تكون بتتمرن صح وبتاكل صح، والنوم هو اللي مضيّع مجهودك.\n\nجرب أسبوع واحد: نام ٧-٨ ساعات وشوف الفرق في طاقتك وتمرينك.\n\n#FITIT #نبض #نوم #صحة',
+    'المشي مُقدَّر بأقل من حقه 🚶\n\n٣٠ دقيقة مشي يومياً:\n• بتحرق ~١٥٠ سعرة\n• بتحسن المزاج والتركيز\n• بتقلل خطر أمراض القلب والسكر\n• ومش محتاجة جيم ولا معدات ولا فلوس\n\nلو التمرين تقيل عليك دلوقتي، ابدأ بالمشي بس. أهم حاجة في اللياقة مش الشدة — الاستمرارية.\n\nولما تكون جاهز للخطوة الجاية، إحنا موجودين — ببلاش.\n' + SITE + '\n\n#FITIT #نبض #مشي #لياقة',
+    'يوم الراحة مش يوم كسل 🛋\n\nالعضلة بتكبر وإنت مرتاح، مش وإنت بتتمرن. التمرين بيعمل الجرح، والراحة بتبني.\n\nعلامات إنك محتاج راحة:\n• نايم كويس ولسه تعبان\n• الأوزان اللي كانت سهلة بقت تقيلة\n• عصبية ومزاج وحش من غير سبب\n\nيوم راحة ذكي: مشي خفيف + إطالات + مية كتير + نوم بدري.\nوجوه التطبيق فيه برنامج يوم راحة كامل — إطالة وتنفس ومشي.\n\n#FITIT #نبض #راحة #تعافي',
+    'إزاي تعرف إنك بتتقدم من غير ميزان؟ 📏\n\nالميزان بيكدب: ممكن تخس دهون وتكسب عضل فيثبت الرقم — وإنت فعلياً اتحسنت جداً.\n\nعلامات تقدم حقيقية:\n• الهدوم بقت أوسع\n• بتطلع السلم من غير نهجان\n• الأوزان اللي كانت تقيلة بقت عادية\n• نومك أعمق ومزاجك أحسن\n\nقيس تقدمك بحاجات كتير مش برقم واحد. التطبيق بيسجللك التمارين والأوزان والصور — وبتشوف الرحلة كلها قدامك.\n' + SITE + '\n\n#FITIT #نبض #تقدم',
+    'الإحماء مش رفاهية ⚡\n\n٥ دقايق إحماء قبل التمرين بتعمل فرق ضخم:\n• بترفع حرارة العضلات فبتقل فرصة الإصابة\n• بتحسن أداءك في التمرين نفسه\n• بتجهز مفاصلك للأحمال\n\nإحماء بسيط: دقيقتين مشي سريع أو حبل + دورانات مفاصل + عدات خفيفة من نفس تمرينك الأول.\n\nكل جلسة في FIT IT فيها الفيديو بيوريك الحركة الصح من الأول — ببلاش.\n' + SITE + '\n\n#FITIT #نبض #احماء #تمرين',
+    'المية والتخسيس 💧\n\nمعلومة بسيطة بتفرق مع ناس كتير: العطش بيتلبس لبس الجوع.\n\nيعني ساعات بتحس إنك جعان وإنت في الحقيقة عطشان — فبتاكل ٣٠٠ سعرة وإنت كنت محتاج كوباية مية بصفر سعرات.\n\nجرب القاعدة دي: أول ما تحس بجوع بين الوجبات، اشرب كوباية مية واستنى ١٠ دقايق. لو الجوع كمل، كل. لو راح — كانت عطش.\n\nعدّاد المية جوه FIT IT بيفكرك طول اليوم — ببلاش.\n' + SITE + '\n\n#FITIT #نبض #مية #تخسيس',
+    'وجع العضلات بعد التمرين — خير ولا شر؟ 🤕\n\nالوجع اللي بييجي تاني يوم اسمه DOMS وهو طبيعي جداً، خصوصاً بعد تمرين جديد أو أول رجوع بعد غياب.\n\nحقايق مهمة:\n• الوجع مش شرط النجاح — ممكن تتمرن ممتاز من غير وجع\n• قمة الوجع بتيجي بعد ٢٤-٤٨ ساعة وبتروح لوحدها\n• أحسن علاج ليه: حركة خفيفة ومية، مش رقاد تام\n• لو الوجع في مفصل مش عضلة، أو حاد جداً — ده إنذار مش DOMS\n\nخلّي جسمك يتعود بالتدريج — وده بالظبط اللي البرامج جوه التطبيق معمولة عشانه.\n' + SITE + '\n\n#FITIT #نبض #تمرين #تعافي',
+    'الدهون مش العدو 🥑\n\nجسمك محتاج دهون عشان الهرمونات والدماغ وامتصاص فيتامينات كاملة (A وD وE وK).\n\nالفرق في النوع والكمية:\n✅ كويسة: زيت زيتون، مكسرات، أفوكادو، سمك\n⚠️ بحساب: سمنة وزبدة\n❌ قللها جداً: مقليات المطاعم والزيوت المتحروقة المعاد استخدامها\n\nالمشكلة الحقيقية إن الدهون سعراتها عالية (٩ سعرات للجرام) — فسهل تاكل كتير من غير ما تحس.\n\nمعلقة زيت = ~١٢٠ سعرة. سجّلها عشان تعرف.\n' + SITE + ' — الحاسبة ببلاش.\n\n#FITIT #نبض #تغذية #دهون',
+    'البيت ولا الجيم؟ الإجابة العلمية 🏠🏋️\n\nالدراسات واضحة: العضلة مش عارفة إنت فين — هي عارفة بس فيه مقاومة ولا لأ.\n\nتمارين وزن الجسم (ضغط، سكوات، عقلة) بتبني عضل حقيقي لحد مستوى متقدم، خصوصاً لو بتزود الصعوبة بالتدريج.\n\nالجيم ميزته: أوزان أتقل وتنوع أكبر — مش سحر إضافي.\n\nالخلاصة: أحسن مكان للتمرين هو المكان اللي هتستمر فيه فعلاً.\nوجوه FIT IT فيه برامج كاملة للاتنين — بيت من غير أي معدات، وجيم بالأوزان.\n' + SITE + ' — ببلاش.\n\n#FITIT #نبض #تمرين_في_البيت #جيم',
+    'ثبت وزنك وواقف مكانك؟ (البلاتوه) 📉\n\nده طبيعي ومش معناه إنك فشلت — جسمك اتأقلم وخلاص.\n\nليه بيحصل: لما بتخس، جسمك الأخف بيحرق أقل، فالسعرات اللي كانت بتنزّلك بقت بالظبط اللي بتثبتك.\n\n٣ حلول عملية:\n١. زوّد حركتك اليومية (مشي أكتر، سلم بدل أسانسير)\n٢. راجع تسجيل أكلك — التقديرات بتزيد مع الوقت من غير ما نحس\n٣. زوّد شدة التمرين مش مدته\n\nاللي بيسجل بيعرف فين المشكلة. اللي مش بيسجل بيفتكر جسمه "باظ".\n' + SITE + ' — سجّل ببلاش.\n\n#FITIT #نبض #تخسيس #بلاتوه',
+    'القهوة والتمرين ☕\n\nالكافيين من أكتر المكملات المثبتة علمياً — بيحسن الأداء والتركيز في التمرين فعلاً.\n\nالاستخدام الصح:\n• كوباية قهوة قبل التمرين بـ٣٠-٦٠ دقيقة\n• من غير سكر ولا لبن كامل لو هدفك تخسيس (القهوة السادة = ~٥ سعرات، اللاتيه = ٢٠٠+)\n• تجنبها بعد الساعة ٤ عصراً — الكافيين بيقعد في جسمك ٦+ ساعات وبيبوظ النوم\n\nوافتكر: النوم الكويس أهم من أي كوباية قهوة.\n\n#FITIT #نبض #قهوة #تمرين',
+    'الألياف — السلاح المنسي في التخسيس 🌾\n\nالأكل الغني بالألياف بيشبعك أكتر بسعرات أقل، وبيظبط السكر والهضم.\n\nكنوز مصرية مليانة ألياف:\n• الفول والعدس والحمص 👑\n• الجوافة والتين البرشومي\n• البامية والملوخية\n• الردة والعيش البلدي (أحسن من الفينو بكتير)\n\nهدفك: ٢٥-٣٠ جرام ألياف يومياً. طبق فول الصبح + شوربة عدس بالليل وإنت قربت توصل.\n\nوكل الأكلات دي بسعراتها الحقيقية جوه التطبيق.\n' + SITE + '\n\n#FITIT #نبض #الياف #تغذية',
   ];
 
   const JOIN_POOL = [
-    'جرب تفتكر آخر مرة حسيت فيها إنك أقوى من الأسبوع اللي فاته 💪\n\nلو مش فاكر — يبقى ده وقتك.\nتمارين بالفيديو، سعرات بالأكل المصري، وأصحاب بيشدوا بعض.\nمن غير فيزا، من غير اشتراك، من غير أعذار.\n\npulse.geddo.online — ادخل حتى من غير حساب واتفرج بنفسك 👀\n\n#PULSE #نبض #ابدأ_دلوقتي',
-    'التطبيقات التانية: "جرب ٧ أيام مجاناً وبعدين ادفع" 💸\nإحنا: مجاني. خلاص. مفيش وبعدين.\n\nتمارين، تغذية، تحديات، دوري أسبوعي — كله ببلاش لأننا مصريين عارفين إن الاشتراكات دي عائق مش خدمة.\n\npulse.geddo.online\n\n#PULSE #نبض #ببلاش',
-    'محتاج ٣ حاجات بس عشان تبدأ النهارده:\n١. موبايلك 📱\n٢. ٣ دقايق ⏱\n٣. قرار ✅\n\nافتح اللينك، جاوب ٩ أسئلة، وخد خطتك وابدأ أول تمرين — قبل ما القهوة تبرد.\npulse.geddo.online — مجاني ١٠٠٪\n\n#PULSE #نبض #ابدأ_دلوقتي',
-    'لصاحبك اللي بيقول "من بكرة" من ٢٠١٩ 😂\n\nابعتله البوست ده. خليه يدخل يشوف إن التمرين ممكن يكون: في البيت، من غير أجهزة، ومجاني.\nومفيش حجة تانية.\n\npulse.geddo.online\n\n#PULSE #نبض #من_بكرة',
-    'إنت مش محتاج مدرب بـ٢٠٠٠ جنيه في الشهر.\nمحتاج خطة واضحة، فيديو يوريك الحركة الصح، وحد يسأل عليك لو غبت.\n\nالثلاثة موجودين في PULSE — وبلاش.\nجرب بنفسك من غير ما تعمل حساب حتى: pulse.geddo.online\n\n#PULSE #نبض #كوتش',
+    'جرب تفتكر آخر مرة حسيت فيها إنك أقوى من الأسبوع اللي فاته 💪\n\nلو مش فاكر — يبقى ده وقتك.\nتمارين بالفيديو، سعرات بالأكل المصري، وأصحاب بيشدوا بعض.\nمن غير فيزا، من غير اشتراك، من غير أعذار.\n\n' + SITE + ' — ادخل حتى من غير حساب واتفرج بنفسك 👀\n\n#FITIT #نبض #ابدأ_دلوقتي',
+    'التطبيقات التانية: "جرب ٧ أيام مجاناً وبعدين ادفع" 💸\nإحنا: مجاني. خلاص. مفيش وبعدين.\n\nتمارين، تغذية، تحديات، دوري أسبوعي — كله ببلاش لأننا مصريين عارفين إن الاشتراكات دي عائق مش خدمة.\n\n' + SITE + '\n\n#FITIT #نبض #ببلاش',
+    'محتاج ٣ حاجات بس عشان تبدأ النهارده:\n١. موبايلك 📱\n٢. ٣ دقايق ⏱\n٣. قرار ✅\n\nافتح اللينك، جاوب ٩ أسئلة، وخد خطتك وابدأ أول تمرين — قبل ما القهوة تبرد.\n' + SITE + ' — مجاني ١٠٠٪\n\n#FITIT #نبض #ابدأ_دلوقتي',
+    'لصاحبك اللي بيقول "من بكرة" من ٢٠١٩ 😂\n\nابعتله البوست ده. خليه يدخل يشوف إن التمرين ممكن يكون: في البيت، من غير أجهزة، ومجاني.\nومفيش حجة تانية.\n\n' + SITE + '\n\n#FITIT #نبض #من_بكرة',
+    'إنت مش محتاج مدرب بـ٢٠٠٠ جنيه في الشهر.\nمحتاج خطة واضحة، فيديو يوريك الحركة الصح، وحد يسأل عليك لو غبت.\n\nالثلاثة موجودين في FIT IT — وبلاش.\nجرب بنفسك من غير ما تعمل حساب حتى: ' + SITE + '\n\n#FITIT #نبض #كوتش',
   ];
 
   const seasonalScrub = (p: { label: string; caption: string }, fallback: { label: string; caption: string }) =>
     seasonal.test(p.caption) ? fallback : p;
 
   const fallbackTrio = [
-    { label: 'ميزة النهارده', caption: `${FEATURES_POOL[dayN % FEATURES_POOL.length]}\n\nوده واحدة بس من اللي جوه — كله مجاني ١٠٠٪.\npulse.geddo.online\n\n#PULSE #نبض #فتنس` },
+    { label: 'ميزة النهارده', caption: `${FEATURES_POOL[dayN % FEATURES_POOL.length]}\n\nوده واحدة بس من اللي جوه — كله مجاني ١٠٠٪.\n${SITE}\n\n#FITIT #نبض #فتنس` },
     { label: 'معلومة تفيدك', caption: KNOWLEDGE_POOL[dayN % KNOWLEDGE_POOL.length] },
     { label: 'انضم لينا', caption: JOIN_POOL[dayN % JOIN_POOL.length] },
   ];
@@ -982,7 +985,7 @@ adminRouter.get('/fb/suggestions', async (_req, res) => {
           {
             role: 'system',
             content:
-              'You write Facebook posts for PULSE (pulse.geddo.online), a 100% free Egyptian fitness app. Spoken Egyptian Arabic (عامية مصرية) only. Return STRICT JSON {"posts":[{"label":"...","caption":"..."},{"label":"...","caption":"..."},{"label":"...","caption":"..."}]} with EXACTLY these three roles in order: (1) label "ميزة النهارده" — sell ONE app feature attractively in 3-5 lines (pick from: voice food logging with Egyptian foods, muscle map with video sessions, live group sessions Sat/Tue/Thu, weekly XP league, 1v1 friend duels, meal plans + grocery list, streaks, PR celebrations, Week Zero for beginners, Arabic articles, reels, chat with voice notes). (2) label "معلومة تفيدك" — a LONG genuinely useful knowledge post (8-14 lines) teaching something concrete about training, nutrition, sleep, or health, with real numbers and Egyptian food examples, ending with a soft mention of the app. (3) label "انضم لينا" — a punchy conversion post that makes people want to join NOW, mentioning it is completely free and that they can browse without an account. Every caption ends with pulse.geddo.online and 2-3 Arabic hashtags + #PULSE #نبض. NEVER use: «خطة مخصصة», «مدعوم بالذكاء الاصطناعي», «حقق أهدافك», «كل حاجة في مكان واحد». ABSOLUTELY NO seasonal content: no Ramadan/رمضان, صيام, عيد, Eid — reject the temptation even if source material mentions it.',
+              'You write Facebook posts for FIT IT (' + SITE + '), a 100% free Egyptian fitness app. Spoken Egyptian Arabic (عامية مصرية) only. Return STRICT JSON {"posts":[{"label":"...","caption":"..."},{"label":"...","caption":"..."},{"label":"...","caption":"..."}]} with EXACTLY these three roles in order: (1) label "ميزة النهارده" — sell ONE app feature attractively in 3-5 lines (pick from: voice food logging with Egyptian foods, muscle map with video sessions, live group sessions Sat/Tue/Thu, weekly XP league, 1v1 friend duels, meal plans + grocery list, streaks, PR celebrations, Week Zero for beginners, Arabic articles, reels, chat with voice notes). (2) label "معلومة تفيدك" — a LONG genuinely useful knowledge post (8-14 lines) teaching something concrete about training, nutrition, sleep, or health, with real numbers and Egyptian food examples, ending with a soft mention of the app. (3) label "انضم لينا" — a punchy conversion post that makes people want to join NOW, mentioning it is completely free and that they can browse without an account. Every caption ends with ' + SITE + ' and 2-3 Arabic hashtags + #FITIT #نبض. NEVER use: «خطة مخصصة», «مدعوم بالذكاء الاصطناعي», «حقق أهدافك», «كل حاجة في مكان واحد». ABSOLUTELY NO seasonal content: no Ramadan/رمضان, صيام, عيد, Eid — reject the temptation even if source material mentions it.',
           },
           {
             role: 'user',
@@ -1230,10 +1233,10 @@ adminRouter.post('/email/draft', async (req: AuthedRequest, res) => {
       {
         role: 'system',
         content:
-          'You write short re-engagement emails for PULSE, a free Egyptian fitness PWA (pulse.geddo.online). ' +
+          'You write short re-engagement emails for FIT IT, a free Egyptian fitness PWA (' + SITE + '). ' +
           'Write in warm spoken Egyptian Arabic (عامية مصرية). Keep it under 120 words, friendly, zero guilt-tripping. ' +
           'Never use the phrases: "في جيبك", "خطة مخصصة", "مدعوم بالذكاء الاصطناعي", "حقق أهدافك", "كل حاجة في مكان واحد". ' +
-          'Always end the body with the link https://pulse.geddo.online on its own line. ' +
+          'Always end the body with the link ' + env.WEB_ORIGIN + ' on its own line. ' +
           'Return JSON: {"subject": "...", "body": "..."} where body uses \n for line breaks. ' +
           'The greeting must start with {name} as a placeholder for the recipient first name.',
       },
@@ -1280,8 +1283,8 @@ adminRouter.post('/email/send', async (req: AuthedRequest, res) => {
         .map((l) =>
           l
             ? `<p style="margin:4px 0">${l.replace(
-                'https://pulse.geddo.online',
-                '<a href="https://pulse.geddo.online" style="color:#f97316;font-weight:bold">pulse.geddo.online</a>',
+                env.WEB_ORIGIN,
+                `<a href="${env.WEB_ORIGIN}" style="color:#f97316;font-weight:bold">${SITE}</a>`,
               )}</p>`
             : '',
         )

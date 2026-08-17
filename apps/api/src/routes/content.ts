@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { prisma } from '../lib/prisma';
+import { env } from '../env';
 import { parseArray } from '../lib/json';
 import { dayString } from '../lib/time';
 import { optionalAuth, AuthedRequest } from '../middleware/auth';
@@ -267,7 +268,7 @@ contentRouter.get('/plans', async (_req, res) => {
 // 120 Arabic health articles + 90 recipes are real indexable pages in a niche
 // with weak search competition — this is the free-traffic asset.
 contentRouter.get('/sitemap.xml', async (_req, res) => {
-  const base = 'https://pulse.geddo.online';
+  const base = env.WEB_ORIGIN;
   const [articles, recipes, programs, categories] = await Promise.all([
     prisma.article.findMany({ select: { id: true } }),
     prisma.recipe.findMany({ select: { id: true } }),

@@ -4,7 +4,7 @@ import { dayString } from './time';
 /**
  * Daily allowance for billable AI calls, per user.
  *
- * The IP rate limit in index.ts stops a scraper; it does not stop a cost. PULSE is
+ * The IP rate limit in index.ts stops a scraper; it does not stop a cost. FIT IT is
  * free and has no subscription revenue behind it, so the only responsible way to run
  * a language model here is with a hard per-user ceiling that fails closed.
  *

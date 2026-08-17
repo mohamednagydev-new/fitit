@@ -19,7 +19,7 @@ const spring = { type: 'spring', stiffness: 260, damping: 24 } as const;
  *  drops the question into the composer with the user's answer to finish. */
 const PROMPTS: { ar: string; en: string }[] = [
   { ar: 'أطول سلسلة أيام وصلتلها كام؟ 🔥', en: 'What is your longest streak ever? 🔥' },
-  { ar: 'أكلة صحية مصرية تنصح بيها الكل؟ 🍽', en: 'One healthy Egyptian dish everyone should try?' },
+  { ar: 'أكلة صحية مصرية تنصح بيها الكل؟ 🍽', en: 'One healthy dish everyone should try?' },
   { ar: 'بتتمرن الصبح ولا بليل؟ ولي؟ ⏰', en: 'Morning or night workouts — and why? ⏰' },
   { ar: 'إيه أصعب تمرينة جربتها في التطبيق؟ 😤', en: 'Hardest exercise you tried in the app? 😤' },
   { ar: 'مين صاحبك اللي المفروض يشترك معانا؟ منشن 👇', en: 'Which friend should join us? Tag them 👇' },

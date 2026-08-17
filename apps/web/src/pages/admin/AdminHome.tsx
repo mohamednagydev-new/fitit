@@ -5,6 +5,7 @@ import {
 } from 'lucide-react';
 import { RESOURCES, GROUP_LABEL, type ResourceGroup } from './adminConfig';
 import { useAuth } from '../../store/auth';
+import { BRAND_NAME } from '../../lib/brand';
 
 /**
  * The admin dashboard.
@@ -47,7 +48,7 @@ export default function AdminHome() {
       <header className="safe-header-tall bg-ink px-5 pb-5 text-white">
         <div className="flex items-center justify-between gap-3">
           <div className="min-w-0">
-            <h1 className="text-xl font-extrabold italic">PULSE Admin</h1>
+            <h1 className="text-xl font-extrabold italic">{BRAND_NAME} Admin</h1>
             <p className="truncate text-xs text-white/50">{user?.email}</p>
           </div>
           <button

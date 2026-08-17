@@ -16,6 +16,7 @@ import CountUp from '../components/CountUp';
 import { toast } from '../lib/toast';
 import { tapFeedback } from '../lib/haptics';
 import { CurlAnim } from '../components/TrainingAnim';
+import { BRAND_NAME } from '../lib/brand';
 import { CarryAnim } from '../components/MoveAnims';
 import { WaterAnim, FlameAnim, TrophyAnim } from '../components/MicroAnims';
 
@@ -170,11 +171,11 @@ export default function Achievements() {
     `تعالى اتحدى معايا على PULSE 💪\nادخل بكود: ${inviteCode}\n${window.location.origin} — مجاني ١٠٠٪`;
 
   const shareInvite = async (inviteCode: string) => {
-    const text = `Join my challenge on PULSE — code: ${inviteCode}`;
+    const text = `Join my challenge on ${BRAND_NAME} — code: ${inviteCode}`;
     const url = window.location.origin;
     if (navigator.share) {
       try {
-        await navigator.share({ title: 'PULSE', text, url });
+        await navigator.share({ title: BRAND_NAME, text, url });
       } catch {
         /* user cancelled the share sheet */
       }

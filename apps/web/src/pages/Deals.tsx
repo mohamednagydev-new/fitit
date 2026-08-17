@@ -11,6 +11,7 @@ import TopBar from '../components/TopBar';
 import AmbientBg from '../components/AmbientBg';
 import { toast } from '../lib/toast';
 import { tapFeedback } from '../lib/haptics';
+import { BRAND_NAME } from '../lib/brand';
 import type { StorePartner } from './Store';
 
 interface Deal {
@@ -130,7 +131,7 @@ function DealSheet({ deal, onClose }: { deal: Deal; onClose: () => void }) {
 
           <div className="flex gap-2">
             {p.whatsapp && (
-              <motion.button whileTap={tap} onClick={() => contact(`https://wa.me/${p.whatsapp}?text=${encodeURIComponent(`${deal.title} — PULSE`)}`)} className="btn-pill btn-green flex-1">
+              <motion.button whileTap={tap} onClick={() => contact(`https://wa.me/${p.whatsapp}?text=${encodeURIComponent(`${deal.title} — ${BRAND_NAME}`)}`)} className="btn-pill btn-green flex-1">
                 <MessageCircle size={16} /> {t('store.whatsapp')}
               </motion.button>
             )}
