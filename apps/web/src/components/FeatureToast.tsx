@@ -24,7 +24,7 @@ const TIPS: { to: string; emoji: string; en: string; ar: string }[] = [
   { to: '/meals', emoji: '🥗', en: 'Your daily meal plan explains every plate — and you can swap any meal', ar: 'خطة أكلك اليومية بتشرح كل طبق — وتقدر تبدّل أي وجبة' },
   { to: '/buddies', emoji: '🎁', en: 'Invite a friend — you both earn streak freezes', ar: 'اعزم صاحبك — وانتوا الاتنين تكسبوا فريز للسلسلة' },
   { to: '/profile', emoji: '🎽', en: 'New 3D avatars! Pick your character from your profile', ar: 'أفاتارات 3D جديدة! اختار شخصيتك من البروفايل' },
-  { to: '/group', emoji: '🎥', en: `Join a live group session with Coach ${BRAND_NAME} — free, weekly`, ar: 'ادخل تمرين جماعي لايف مع كوتش PULSE — ببلاش وكل أسبوع' },
+  { to: '/group', emoji: '🎥', en: `Join a live group session with Coach ${BRAND_NAME} — free, weekly`, ar: 'ادخل تمرين جماعي لايف مع كوتش FIT IT — ببلاش وكل أسبوع' },
   { to: '/reels', emoji: '🎬', en: 'Short workout reels — learn one new move on your break', ar: 'ريلز تمارين قصيرة — اتعلم حركة جديدة في البريك' },
 ];
 

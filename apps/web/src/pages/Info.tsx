@@ -374,7 +374,8 @@ function InviteFriendsCard() {
       </div>
       <div className="flex gap-2">
         <button
-          onClick={() => data?.link && waOpen(`تعالى نتمرن مع بعض على PULSE 💪 تمارين وسعرات بالأكل المصري وتحديات — مجاني ١٠٠٪:\n${data.link}`)}
+          onClick={() => data?.link && waOpen(`Let's train together on ${BRAND_NAME} 💪 Workouts, calorie tracking and challenges — 100% free:
+${data.link}`)}
           disabled={!data?.link}
           className="flex min-h-[40px] flex-1 items-center justify-center gap-2 rounded-full bg-[#25D366] py-2 text-sm font-bold text-white transition active:scale-95 disabled:opacity-60"
         >

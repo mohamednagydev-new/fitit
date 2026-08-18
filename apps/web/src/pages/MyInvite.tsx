@@ -64,7 +64,7 @@ export default function MyInvite() {
             link={referral.link}
             waText={L(
               `Training with ${BRAND_NAME} — free, and it counts your everyday food. Join me: ${referral.link}`,
-              `أنا بتمرن على PULSE — مجاني وبالمصري وبيحسب أكلنا. انضملي من هنا: ${referral.link}`,
+              `أنا بتمرن على FIT IT — مجاني وبالمصري وبيحسب أكلنا. انضملي من هنا: ${referral.link}`,
             )}
             isAr={isAr}
             footer={
@@ -87,7 +87,7 @@ export default function MyInvite() {
             link={coachCode.url}
             waText={L(
               `I coach on ${BRAND_NAME} now — register from my link and you land connected to me directly: ${coachCode.url}`,
-              `أنا بدرّب على PULSE — سجّل من اللينك ده وهتلاقي نفسك متوصّل بيا على طول: ${coachCode.url}`,
+              `أنا بدرّب على FIT IT — سجّل من اللينك ده وهتلاقي نفسك متوصّل بيا على طول: ${coachCode.url}`,
             )}
             isAr={isAr}
           />
@@ -105,7 +105,7 @@ export default function MyInvite() {
             link={gymCode.url}
             waText={L(
               `Join our gym on ${BRAND_NAME} — every workout counts and your name goes on the gym screen: ${gymCode.url}`,
-              `انضم لجيمنا على PULSE — كل تمرينة بتتحسب واسمك يطلع على شاشة الجيم: ${gymCode.url}`,
+              `انضم لجيمنا على FIT IT — كل تمرينة بتتحسب واسمك يطلع على شاشة الجيم: ${gymCode.url}`,
             )}
             isAr={isAr}
           />

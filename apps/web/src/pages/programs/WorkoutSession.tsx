@@ -5,6 +5,7 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Check, SkipForward, Music, Play, Pause, X, Timer, ChevronRight, Trophy, Dumbbell, Share2, Volume2, VolumeX, AlertTriangle, PlayCircle, Pencil, Trash2, ListChecks, Bookmark } from 'lucide-react';
 import { api } from '../../lib/api';
+import { BRAND_NAME } from '../../lib/brand';
 import { toast } from '../../lib/toast';
 import { shareMilestone } from '../../lib/shareCard';
 import { WaIcon, waOpen } from '../../components/WaShare';
@@ -596,7 +597,9 @@ export default function WorkoutSession() {
         <button
           onClick={() => {
             const link = referral?.link || window.location.origin;
-            waOpen(`لسه مخلص تمرين ${group?.name ? `«${group.name}» ` : ''}على PULSE 💪🔥\nتيجي نتمرن مع بعض؟ التطبيق مجاني ١٠٠٪:\n${link}`);
+            waOpen(`Just finished ${group?.name ? `a «${group.name}» ` : 'a '}workout on ${BRAND_NAME} 💪🔥
+Come train with me — the app is 100% free:
+${link}`);
           }}
           className="mt-8 flex min-h-[48px] w-full max-w-xs items-center justify-center gap-2 rounded-full bg-[#25D366] font-bold text-white shadow-lg transition active:scale-[0.97]"
         >
@@ -1001,7 +1004,8 @@ export default function WorkoutSession() {
               <p className="mt-1 text-xl font-bold">{prWeight} {t('session.kg')}</p>
               <div className="pointer-events-auto mt-3 flex items-center justify-center gap-2">
                 <button
-                  onClick={() => waOpen(`كسرت رقمي القياسي النهارده 🏆 ${prWeight} كجم ${current?.name ? `في ${current.name}` : ''} على PULSE 💪\nتعالى اتحدى معايا — مجاني: ${window.location.origin}`)}
+                  onClick={() => waOpen(`New personal record today 🏆 ${prWeight} kg${current?.name ? ` on ${current.name}` : ''} on ${BRAND_NAME} 💪
+Come challenge me — it's free: ${window.location.origin}`)}
                   className="inline-flex items-center gap-1.5 rounded-full bg-[#25D366] px-4 py-1.5 text-sm font-bold"
                 >
                   <WaIcon size={14} /> WhatsApp

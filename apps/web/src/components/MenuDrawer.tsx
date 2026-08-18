@@ -60,7 +60,7 @@ const GROUPS: Group[] = [
   {
     en: 'Discover', ar: 'اكتشف',
     items: [
-      { to: '/features', en: `${BRAND_NAME} treasures`, ar: 'كنوز PULSE', icon: Gem },
+      { to: '/features', en: `${BRAND_NAME} treasures`, ar: 'كنوز FIT IT', icon: Gem },
       { to: '/gyms', en: 'Find a gym', ar: 'دوّر على جيم', icon: Building2 },
       { to: '/store', en: 'Store', ar: 'المتجر', icon: ShoppingBag },
       { to: '/deals', en: 'Deals', ar: 'العروض', icon: Ticket },

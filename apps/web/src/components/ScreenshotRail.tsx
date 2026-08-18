@@ -25,7 +25,7 @@ export const APP_SHOTS: Shot[] = [
   { src: '/landing/shots/s-progress.jpg', ar: 'تقدمك ورحلة الدايت', en: 'Progress & your diet journey' },
   { src: '/landing/shots/s-group.jpg', ar: 'حصص لايف مع الناس', en: 'Live classes together' },
   { src: '/landing/shots/s-wellness.jpg', ar: 'مكتبة صحتك بالعربي', en: 'Your wellness library' },
-  { src: '/landing/shots/s-features.jpg', ar: 'كنوز PULSE كلها', en: `All the ${BRAND_NAME} treasures` },
+  { src: '/landing/shots/s-features.jpg', ar: 'كنوز FIT IT كلها', en: `All the ${BRAND_NAME} treasures` },
 ];
 
 export default function ScreenshotRail({ shots = APP_SHOTS, className = '' }: { shots?: Shot[]; className?: string }) {
