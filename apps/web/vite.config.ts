@@ -45,11 +45,11 @@ export default defineConfig(({ mode }) => {
           { name: 'Watch reels', short_name: 'Reels', url: '/reels', icons: [{ src: 'pwa-192.png', sizes: '192x192' }] },
         ],
         icons: [
-          { src: 'pwa-192.png', sizes: '192x192', type: 'image/png', purpose: 'any' },
-          { src: 'pwa-512.png', sizes: '512x512', type: 'image/png', purpose: 'any' },
+          { src: 'pwa-192.png?v=2', sizes: '192x192', type: 'image/png', purpose: 'any' },
+          { src: 'pwa-512.png?v=2', sizes: '512x512', type: 'image/png', purpose: 'any' },
           // Full-bleed with safe-zone padding so Android launchers can crop to any shape.
-          { src: 'pwa-maskable-512.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' },
-          { src: 'apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+          { src: 'pwa-maskable-512.png?v=2', sizes: '512x512', type: 'image/png', purpose: 'maskable' },
+          { src: 'apple-touch-icon.png?v=2', sizes: '180x180', type: 'image/png' },
         ],
       },
       workbox: {
