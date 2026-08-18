@@ -92,7 +92,7 @@ export default function Home() {
           {/* Brand truly centered (logo + wordmark), independent of the uneven
               icon counts on either side. */}
           <span className="pointer-events-none absolute inset-x-0 top-1/2 flex -translate-y-1/2 flex-col items-center justify-center">
-            <img src="/pwa-192.png" alt="" className="h-7 w-7 rounded-lg shadow" />
+            <img src="/pwa-192.png" alt="" className="h-10 w-auto" />
             <span className="mt-0.5 text-[11px] font-extrabold italic tracking-[0.2em]">{BRAND_NAME}</span>
           </span>
           <div className="relative flex items-center gap-3.5">

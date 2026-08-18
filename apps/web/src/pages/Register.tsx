@@ -81,7 +81,7 @@ export default function Register() {
       <div className="relative flex min-h-screen flex-col px-5 pb-8" style={{ paddingTop: 'calc(env(safe-area-inset-top, 0px) + 1.25rem)' }}>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <img src="/pwa-192.png" alt="" className="h-9 w-9 rounded-xl shadow-lg" />
+            <img src="/pwa-192.png" alt="" className="h-12 w-auto" />
             <span className="text-2xl font-extrabold italic">{BRAND_NAME}</span>
             <span className="rounded-full bg-white/20 px-2.5 py-1 text-[10px] font-extrabold tracking-wide backdrop-blur">
               {t('guest.cta')}

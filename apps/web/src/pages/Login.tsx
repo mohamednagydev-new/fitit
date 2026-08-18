@@ -76,7 +76,7 @@ export default function Login() {
       <div className="relative flex min-h-screen flex-col px-5 pb-8" style={{ paddingTop: 'calc(env(safe-area-inset-top, 0px) + 1.25rem)' }}>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <img src="/pwa-192.png" alt="" className="h-9 w-9 rounded-xl shadow-lg" />
+            <img src="/pwa-192.png" alt="" className="h-12 w-auto" />
             <span className="text-2xl font-extrabold italic">{BRAND_NAME}</span>
           </div>
           <LanguageToggle variant="compact" />
