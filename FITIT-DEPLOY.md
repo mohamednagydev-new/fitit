@@ -59,6 +59,14 @@ node node_modules\tsx\dist\cli.mjs prisma\seed-demo-fitit.ts    # OPTIONAL: demo
 ```
 English-only brand: skip every `prisma\ar\*` script and `translate-manual.ts`.
 
+## 5b. One-time fix for accounts created before the English-only patch
+Accounts registered before this fix may carry preferredLang='ar' (Arabic
+notifications). Run once:
+```powershell
+cd C:itit
+node -e "const{PrismaClient}=require('@prisma/client');const p=new PrismaClient();p.user.updateMany({where:{preferredLang:'ar'},data:{preferredLang:'en'}}).then(r=>{console.log('fixed',r.count);return p.$disconnect()})"
+```
+
 ## 6. HTTPS
 Run win-acme (`wacs.exe`), pick the `fitit` site → free cert + 443 binding, same as PULSE.
 

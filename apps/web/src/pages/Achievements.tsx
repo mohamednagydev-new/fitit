@@ -165,10 +165,11 @@ export default function Achievements() {
     onError: (e: any) => toast(e?.message || 'Could not delete', 'error'),
   });
 
-  /** Prefilled Arabic invite for WhatsApp — the channel Egyptian invites
-   *  actually travel on. */
+  /** Prefilled WhatsApp invite — English-only brand. */
   const waInviteText = (inviteCode: string) =>
-    `تعالى اتحدى معايا على PULSE 💪\nادخل بكود: ${inviteCode}\n${window.location.origin} — مجاني ١٠٠٪`;
+    `Challenge me on ${BRAND_NAME} 💪
+Join with code: ${inviteCode}
+${window.location.origin} — 100% free`;
 
   const shareInvite = async (inviteCode: string) => {
     const text = `Join my challenge on ${BRAND_NAME} — code: ${inviteCode}`;

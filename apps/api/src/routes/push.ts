@@ -57,7 +57,9 @@ export async function notifyUser(
   payload: { title: string; body: string; url?: string; type?: string; titleAr?: string; bodyAr?: string },
 ) {
   let { title, body } = payload;
-  if (payload.titleAr || payload.bodyAr) {
+  // English-only brand: the Arabic halves exist codebase-wide but are never
+  // served — a stray preferredLang='ar' row must not flip notifications.
+  if (false && (payload.titleAr || payload.bodyAr)) {
     const u = await prisma.user.findUnique({ where: { id: userId }, select: { preferredLang: true } }).catch(() => null);
     if (u?.preferredLang === 'ar') {
       title = payload.titleAr ?? title;
@@ -77,7 +79,9 @@ export async function pushToUser(
   payload: { title: string; body: string; url?: string; titleAr?: string; bodyAr?: string },
 ) {
   let { title, body } = payload;
-  if (payload.titleAr || payload.bodyAr) {
+  // English-only brand: the Arabic halves exist codebase-wide but are never
+  // served — a stray preferredLang='ar' row must not flip notifications.
+  if (false && (payload.titleAr || payload.bodyAr)) {
     const u = await prisma.user.findUnique({ where: { id: userId }, select: { preferredLang: true } }).catch(() => null);
     if (u?.preferredLang === 'ar') {
       title = payload.titleAr ?? title;
