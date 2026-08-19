@@ -131,6 +131,10 @@ oauthRouter.get('/:provider/callback', async (req, res) => {
       }
     }
 
+    if (user.bannedAt) {
+      res.clearCookie('oauth_state', { path: '/' });
+      return res.redirect(`${env.WEB_ORIGIN}/login?oauth=suspended`);
+    }
     await issueTokens(res, user);
     res.clearCookie('oauth_state', { path: '/' });
     res.redirect(`${env.WEB_ORIGIN}/?oauth=success`);
