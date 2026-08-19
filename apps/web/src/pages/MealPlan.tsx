@@ -62,6 +62,7 @@ export default function MealPlan() {
       qc.invalidateQueries({ queryKey: ['tracker-day'] });
       qc.invalidateQueries({ queryKey: ['quests'] });
     },
+    onError: () => toast(isAr ? 'مقدرناش نسجّل الوجبة — جرّب تاني' : "Couldn't log that meal — try again", 'error'),
   });
 
   if (isLoading) return <Loader />;
@@ -506,6 +507,7 @@ function SwapSheet({ slot, currentId, onClose }: { slot: string; currentId: stri
       qc.invalidateQueries({ queryKey: ['meal-plan'] });
       onClose();
     },
+    onError: () => toast(isAr ? 'مقدرناش نسجّل الوجبة — جرّب تاني' : "Couldn't log that meal — try again", 'error'),
   });
 
   return (
