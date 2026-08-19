@@ -80,6 +80,13 @@ async function runCheck() {
     await postDailyChallengePrompts().catch((e) => console.warn('[weekly-prompt]', e?.message));
   }
 
+  // Daily 06:00 — pull new reels from the configured channels (REELS_CHANNELS)
+  // into the review inbox. No env → no-op.
+  if (hour === 6 && (await claimJob(`reelspull:${day}`))) {
+    const { pullReels } = await import('./reelsPull');
+    await pullReels().catch((e) => console.warn('[reels-pull]', e?.message));
+  }
+
   // Live-session reminders: joining a Thursday-7pm session used to produce
   // total silence until (and including) Thursday 7pm. One ping in the hour
   // before the start, per participant, claimed per session.
@@ -448,32 +455,32 @@ const GROUP_SLOTS = [
   {
     dow: 6, // Saturday
     hour: 19,
-    title: 'Full-Body Kickoff · تمرين الجسم كله',
+    title: 'Full-Body Kickoff',
     muscleFocus: 'Full body',
     description:
-      'Open live session with Coach FIT IT — all levels welcome. جلسة لايف مفتوحة مع كوتش FIT IT، كل المستويات — انضم وشد حيلك مع الناس.',
+      'Open live session with the FIT IT team — all levels welcome. Join in and push together.',
   },
   {
     dow: 2, // Tuesday
     hour: 20,
-    title: 'HIIT Express · حرق سريع',
+    title: 'HIIT Express',
     muscleFocus: 'Cardio',
     description:
-      '25 minutes, maximum burn, shared timer. ٢٥ دقيقة حرق على الآخر، بتايمر مشترك — نبدأ مع بعض ونخلص مع بعض.',
+      '25 minutes, maximum burn, shared timer — we start together, we finish together.',
   },
   {
     dow: 4, // Thursday
     hour: 20,
-    title: 'Yoga Wind-Down · يوجا آخر الأسبوع',
+    title: 'Yoga Wind-Down',
     muscleFocus: 'Mobility',
     description:
-      'Slow stretch & breathing to close the week. تمدد هادي وتنفس نقفل بيه الأسبوع — جسمك يستاهل.',
+      'Slow stretch & breathing to close the week — your body earned it.',
   },
 ];
 
 async function ensureGroupSessions() {
   const coach = await prisma.user.findUnique({
-    where: { email: 'coach@pulse.geddo.online' },
+    where: { email: process.env.OFFICIAL_COACH_EMAIL ?? 'coach.dan@fitit.app' },
     select: { id: true },
   });
   if (!coach) return; // pre-launch DB without the official account — nothing to do
