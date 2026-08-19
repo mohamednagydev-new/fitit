@@ -41,6 +41,7 @@ import { assessmentRouter } from './routes/assessment';
 import { wearablesRouter } from './routes/wearables';
 import { routinesRouter } from './routes/routines';
 import { orgRouter } from './routes/org';
+import { adminOpsRouter } from './routes/adminOps';
 import { localizeResponse } from './lib/localize';
 import { optionalAuth } from './middleware/auth';
 
@@ -162,6 +163,7 @@ app.use('/api/assessment', assessmentRouter);
 app.use('/api/wearables', wearablesRouter);
 app.use('/api/routines', routinesRouter);
 app.use('/api/org', orgRouter);
+app.use('/api/admin-ops', adminOpsRouter);
 app.use('/api/admin/reels', adminReelsRouter);
 app.use('/api/admin', adminRouter);
 app.use('/media', mediaRouter);

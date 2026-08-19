@@ -171,6 +171,7 @@ const TvBoard = lazyRoute(() => import('./pages/TvBoard'));
 const PartnerBenefits = lazyRoute(() => import('./pages/PartnerBenefits'));
 const CoachClientDetail = lazyRoute(() => import('./pages/social/CoachClientDetail'));
 const MyInvite = lazyRoute(() => import('./pages/MyInvite'));
+const AdminLayout = lazyRoute(() => import('./components/AdminLayout'));
 
 function RequireAuth({ children }: { children: ReactNode }) {
   const status = useAuth((s) => s.status);
@@ -303,7 +304,7 @@ export default function App() {
       <FeatureToast />
       <OfflineBanner />
       <PullToRefresh />
-      <div className="app-frame">
+      <div className={location.pathname.startsWith('/admin') ? 'admin-frame' : 'app-frame'}>
       {/* Enter-only transition. An exit animation with mode="wait" could leave the
           next route unmounted if the outgoing page stalled (e.g. tearing down the
           reels videos) — which showed as a blank screen until refresh. */}
@@ -437,7 +438,9 @@ export default function App() {
         <Route
           element={
             <RequireAdmin>
-              <PlainOutlet />
+              {/* Route-level admin shell: sidebar + topbar for every admin
+                  screen, full-width (App swaps the 480px frame below). */}
+              <AdminLayout />
             </RequireAdmin>
           }
         >

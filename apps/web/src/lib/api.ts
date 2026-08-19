@@ -1,3 +1,7 @@
+/** Base URL for API/media requests. Empty on the web build (same-origin
+ *  relative URLs); set VITE_API_BASE to an absolute origin for native shells. */
+export const API_BASE = (import.meta.env.VITE_API_BASE as string) || '';
+
 let accessToken: string | null = null;
 let lang: string = localStorage.getItem('fitit_lang') || 'ar';
 
