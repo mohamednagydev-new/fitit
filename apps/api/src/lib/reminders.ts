@@ -459,6 +459,8 @@ const GROUP_SLOTS = [
     muscleFocus: 'Full body',
     description:
       'Open live session with the FIT IT team — all levels welcome. Join in and push together.',
+    instructions:
+      'Warm-up (5 min): march in place + arm circles + light squats.\n3 rounds — 45s work / 15s rest per exercise:\n1) Squats\n2) Push-ups (knees are fine)\n3) Plank\n4) Lunges\n5) Glute Bridge\n1 min rest between rounds. The coach drives the shared timer — move with it.',
   },
   {
     dow: 2, // Tuesday
@@ -467,6 +469,8 @@ const GROUP_SLOTS = [
     muscleFocus: 'Cardio',
     description:
       '25 minutes, maximum burn, shared timer — we start together, we finish together.',
+    instructions:
+      'Warm-up 3 min.\n5 rounds × (40s work / 20s rest):\n1) Jumping Jacks\n2) High Knees\n3) Mountain Climbers\n4) Burpees (or fast squats if new)\nGoal: finish every round with the timer — your pace, just don’t stop.',
   },
   {
     dow: 4, // Thursday
@@ -475,6 +479,8 @@ const GROUP_SLOTS = [
     muscleFocus: 'Mobility',
     description:
       'Slow stretch & breathing to close the week — your body earned it.',
+    instructions:
+      'Bring a mat and water.\nSlow flow — each move 45-60s with the timer:\n1) Deep breathing (2 min)\n2) Cat-Cow\n3) Child’s Pose\n4) Hamstring stretch\n5) Floor twist\n6) Relax (3 min)\nNo forcing — stretch until a gentle pull, never pain.',
   },
 ];
 
@@ -493,14 +499,22 @@ async function ensureGroupSessions() {
       if (localDow(scheduledAt) !== slot.dow) continue;
       const exists = await prisma.groupSession.findFirst({
         where: { coachUserId: coach.id, scheduledAt },
-        select: { id: true },
+        select: { id: true, instructions: true },
       });
-      if (exists) continue;
+      if (exists) {
+        // Backfill: sessions created before slots carried a written plan left
+        // joiners staring at an empty room ("what do I actually do?").
+        if (!exists.instructions) {
+          await prisma.groupSession.update({ where: { id: exists.id }, data: { instructions: slot.instructions } });
+        }
+        continue;
+      }
       await prisma.groupSession.create({
         data: {
           coachUserId: coach.id,
           title: slot.title,
           description: slot.description,
+          instructions: slot.instructions,
           muscleFocus: slot.muscleFocus,
           scheduledAt,
         },
