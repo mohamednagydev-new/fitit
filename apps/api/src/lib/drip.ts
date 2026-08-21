@@ -33,7 +33,7 @@ const D2: Msg = {
   titleAr: 'Log one meal — see your calories 🥗',
   body: 'Snap or type what you ate and the app counts the calories for you. Takes 20 seconds.',
   bodyAr: 'Snap or type what you ate and the app counts the calories for you. Takes 20 seconds.',
-  url: '/food',
+  url: '/tracker',
 };
 const D3: Msg = {
   title: 'Day 3: your first badge is one workout away 🔥',
