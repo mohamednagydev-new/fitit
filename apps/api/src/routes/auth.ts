@@ -101,7 +101,7 @@ authRouter.post('/forgot-password', async (req, res) => {
 
     const origin = process.env.WEB_ORIGIN ?? 'http://localhost:5173';
     const link = `${origin}/reset-password?token=${rawToken}`;
-    await sendMail({
+    const mail = await sendMail({
       to: user.email,
       subject: 'Reset your FIT IT password',
       text: `We received a request to reset your password.\n\nOpen this link to set a new password (valid for 1 hour):\n${link}\n\nIf you didn't request this, you can safely ignore this email.`,
@@ -117,6 +117,10 @@ authRouter.post('/forgot-password', async (req, res) => {
           <p style="margin:0;color:#9ca3af;font-size:12px">If you didn't request this, you can safely ignore this email.</p>
         </div>`,
     });
+    // SMTP down must NOT masquerade as "check your inbox".
+    if (!mail.ok) {
+      return res.status(503).json({ error: "We couldn't send the email right now — try again in a few minutes." });
+    }
   }
 
   res.json({ ok: true });

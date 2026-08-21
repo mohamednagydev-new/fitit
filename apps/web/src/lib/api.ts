@@ -20,7 +20,17 @@ export function setApiLang(l: string) {
  *  connection must never sign anyone out). */
 type RefreshResult = 'ok' | 'denied' | 'offline';
 
+/** Single-flight: parallel 401s must share ONE refresh — the server rotates
+ *  the token on first use, so concurrent refreshes randomly logged users out. */
+let refreshInFlight: Promise<RefreshResult> | null = null;
+
 async function tryRefreshEx(): Promise<RefreshResult> {
+  if (refreshInFlight) return refreshInFlight;
+  refreshInFlight = doRefresh().finally(() => { refreshInFlight = null; });
+  return refreshInFlight;
+}
+
+async function doRefresh(): Promise<RefreshResult> {
   try {
     // 10s cap: a cold server or dead network must degrade to 'offline', not
     // hold the installed app on its splash screen indefinitely.
